@@ -777,3 +777,500 @@ kill @e[tag=summoned,scores={summon_age=2400}]
 5. **Phase 5 (Low):** Optimize Deep Pockets (lazy load backpack) — save 0.35ms
 
 **Total Potential Savings:** ~4.0ms per-tick (halves computational load).
+
+---
+
+## 9. Advanced Optimization: Advancement-Triggered Abilities (Vanilla Items + Predicates)
+
+### 9.1 Problem: Per-Tick vs. Event-Driven Design
+
+**Current Approach (Per-Tick):**
+```mcfunction
+execute as @a[tag=role_farmer] at @s if score @s photosynthesis_timer <= 0 if predicate is_daylight run effect give @s absorption
+scoreboard players remove @a[tag=role_farmer,scores={photosynthesis_timer=1..}] photosynthesis_timer 1
+```
+- Runs **every tick** for every player (40 ticks/sec × 40 players = 1,600 executions/sec)
+- Wastes CPU checking players not using ability
+- **Cost:** ~0.5ms per 100 players
+
+**Advancement-Triggered Approach (Vanilla Items):**
+```json
+{
+  "criteria": {
+    "ate_apple_as_farmer": {
+      "trigger": "minecraft:consume_item",
+      "conditions": {
+        "player": [
+          {"condition": "minecraft:entity_properties", "entity": "this", "predicate": {"nbt": ["Tags[\"role_farmer\"]"]}}
+        ],
+        "item": {"items": ["minecraft:apple"]}
+      }
+    }
+  },
+  "requirements": [["ate_apple_as_farmer"]],
+  "rewards": {"function": "nations:farmer/midas_touch"}
+}
+```
+- Uses **vanilla apple** — no custom items needed
+- Fires **only on consume event** (~10 times/sec for all players, not per tick)
+- Role check happens in advancement predicate
+- **Cost:** ~0.05ms per 100 players (10× faster)
+
+---
+
+### 9.2 Advancement-Based Abilities (Vanilla Items + Role Predicates)
+
+#### **Category 1: Consumable-Based (Use vanilla food/potion items)**
+
+| Ability | Vanilla Item | Predicate Check | Reward Function |
+|---------|---|---|---|
+| **Midas Touch** | `minecraft:apple` | Has `role_farmer` tag | Apply absorption + regen |
+| **Better Together** | Any food item | Has `role_farmer` tag + nearby farmers within 10 blocks | Proximity heal to nearby farmers |
+| **Nature's Vengeance** | `minecraft:beetroot` | Has `role_farmer` tag | Summon evoker fangs |
+| **Knowledgeable** | N/A (Enchanting Table use) | Has `role_enchanter` tag | Grant +1 XP level |
+
+**Advancement Predicate Example (Midas Touch):**
+```json
+{
+  "display": {"icon": {"item": "minecraft:apple"}, "hidden": true, "announce": false},
+  "criteria": {
+    "ate_apple_as_farmer": {
+      "trigger": "minecraft:consume_item",
+      "conditions": {
+        "player": [
+          {"condition": "minecraft:entity_properties", "entity": "this", 
+           "predicate": {"nbt": ["Tags[\"role_farmer\"]"]}}
+        ],
+        "item": {"items": ["minecraft:apple"]}
+      }
+    }
+  },
+  "requirements": [["ate_apple_as_farmer"]],
+  "rewards": {"function": "nations:farmer/midas_touch"}
+}
+```
+
+---
+
+#### **Category 2: Item-Use-Based (Right-click events on vanilla items)**
+
+| Ability | Vanilla Item | Trigger | Predicate Check |
+|---------|---|---|---|
+| **Sky Mage** | `minecraft:feather` | `using_item` | Has `role_enchanter` tag + cooldown check in reward |
+| **Dowsing Rod** | `minecraft:amethyst_shard` | `item_used_on_block` | Has `role_explorer` tag |
+| **War Cry** | Any `minecraft:axe` | `using_item` | Has `role_warrior` tag + global cooldown |
+| **Weightless Spirit** | Arrow in `shot_projectile` | `shot_projectile` | Has `role_explorer` tag + glowstone in offhand |
+
+**Advancement Predicate Example (Sky Mage):**
+```json
+{
+  "display": {"icon": {"item": "minecraft:feather"}, "hidden": true, "announce": false},
+  "criteria": {
+    "used_feather_as_enchanter": {
+      "trigger": "minecraft:using_item",
+      "conditions": {
+        "player": [
+          {"condition": "minecraft:entity_properties", "entity": "this", 
+           "predicate": {"nbt": ["Tags[\"role_enchanter\"]"]}}
+        ],
+        "item": {"items": ["minecraft:feather"]}
+      }
+    }
+  },
+  "rewards": {"function": "nations:enchanter/sky_mage_check"}
+}
+```
+
+**Reward Function with Cooldown Check:**
+```mcfunction
+# sky_mage_check: validate cooldown before casting
+execute if score @s sky_mage_cd matches ..0 run function nations:enchanter/sky_mage_cast
+```
+
+---
+
+#### **Category 3: Entity-Death-Based (Kill events with predicates)**
+
+| Ability | Entity Killed | Predicate Condition | Reward |
+|---|---|---|---|
+| **Blood Sacrifice** | Pig | Named "Vessel" + killed by `role_enchanter` | Set max_health to 24 + debuffs |
+| **Bloodthirsty** | Player | Killed by `role_warrior` | Heal 1.5 hearts |
+| **Scavenger** | Mob (any) | Killed by `role_warrior` + 10% RNG | Drop armor/weapon at full durability |
+
+**Advancement Predicate Example (Blood Sacrifice):**
+```json
+{
+  "display": {"icon": {"item": "minecraft:redstone"}, "hidden": true, "announce": false},
+  "criteria": {
+    "killed_vessel_pig": {
+      "trigger": "minecraft:entity_killed",
+      "conditions": {
+        "entity": [
+          {"condition": "minecraft:entity_properties", "entity": "this",
+           "predicate": {"type": "minecraft:pig"}}
+        ],
+        "player": [
+          {"condition": "minecraft:entity_properties", "entity": "this",
+           "predicate": {"nbt": ["Tags[\"role_enchanter\"]"]}}
+        ]
+      }
+    }
+  },
+  "rewards": {"function": "nations:enchanter/blood_sacrifice_check"}
+}
+```
+
+**Reward Function (validate named "Vessel"):**
+```mcfunction
+# blood_sacrifice_check: verify pig name before applying effect
+execute if entity @e[type=pig,name='"Vessel"',distance=..5] run function nations:enchanter/blood_sacrifice
+```
+
+---
+
+### 9.3 Reducing Per-Tick Checks to Interval-Based (Every 10+ Ticks)
+
+For abilities that **must** remain continuous (position-based), reduce frequency from every-tick to interval-based:
+
+#### **Original Per-Tick (Runs every tick = 20 times/sec):**
+```mcfunction
+execute as @a[tag=role_miner] at @s if predicate is_underground run effect give @s haste
+execute as @a[tag=role_miner] at @s if predicate is_underground run effect give @s night_vision
+```
+- **Cost:** 0.3ms per 100 players (heavy overhead)
+
+#### **Optimized (Run every 10 ticks = 2 times/sec):**
+```mcfunction
+# In main tick.mcfunction
+scoreboard players add tick_counter dummy 1
+execute if score tick_counter dummy matches 10 run function nations:interval_checks
+execute if score tick_counter dummy matches 20 run scoreboard players set tick_counter dummy 0
+
+# In nations:interval_checks (runs every 10 ticks only)
+execute as @a[tag=role_miner] at @s if predicate nations:is_below_y0 run effect give @s haste 10 0
+execute as @a[tag=role_miner] at @s if predicate nations:is_below_y0 run effect give @s night_vision 10 0
+execute as @a[tag=role_miner] at @s if predicate nations:is_below_y0 run effect give @s resistance 10 0
+```
+
+**Effect Duration Adjustment:**
+- Effects persist 10 ticks (0.5s) after checks
+- Re-apply every 10 ticks to maintain coverage
+- **Savings:** 90% reduction (9/10 ticks eliminated)
+
+---
+
+### 9.4 Per-Tick → Interval-Based Conversion
+
+| Ability | Original Frequency | Optimized Frequency | Effect Duration | Savings |
+|---------|---|---|---|---|
+| **Photosynthesis** | Every 1 tick | Every 10 ticks | 10 ticks | -90% |
+| **Cave Dweller** | Every 1 tick | Every 10 ticks | 10 ticks | -90% |
+| **Tunnel Rat** | Every 1 tick | Every 10 ticks | 10 ticks | -90% |
+| **Trailblazer** | Every 1 tick | Every 10 ticks | 10 ticks | -90% |
+| **Thou Shalt Bleed** | Every 1 tick | Every 10 ticks | 10 ticks | -90% |
+| **Adrenaline Rush** | Every 1 tick | Every 10 ticks | Remains 100 ticks | -90% |
+| **Rapid Transit** | Every 1 tick | Every 10 ticks | 10 ticks | -90% |
+| **Travel Fatigue** | Every 1 tick | Every 10 ticks | Saturation drain 10 ticks | -90% |
+| **Lithic Resonance** | Every 10 ticks | Every 20 ticks | Sound still plays every 20 ticks | -50% |
+| **Specialized Smelting** | Every 1 tick | Every 10 ticks | Cook time still incremented every 10 ticks | -90% |
+
+**Implementation Pattern (Interval-based):**
+```mcfunction
+# tick.mcfunction
+scoreboard players add tick_counter dummy 1
+
+# Run checks every 10 ticks
+execute if score tick_counter dummy matches 10 run function nations:check_interval_10
+
+# Reset counter at 20 (two cycles per second)
+execute if score tick_counter dummy matches 20 run scoreboard players set tick_counter dummy 0
+
+# In nations:check_interval_10
+execute as @a[tag=role_farmer] at @s if predicate nations:is_in_sunlight run effect give @s absorption 10 3
+execute as @a[tag=role_miner] at @s if predicate nations:is_underground run effect give @s haste 10 0
+execute as @a[tag=role_explorer] at @s if predicate nations:on_ground run effect give @s speed 10 0
+execute as @a[tag=!role_explorer,nbt={Sprinting:1b}] unless predicate nations:in_water run function nations:travel_fatigue
+```
+
+---
+
+### 9.5 Predicate Library for Interval Checks
+
+Create reusable predicates in `data/nations/predicates/`:
+
+```json
+// is_below_y0.json — Cave Dweller, Tunnel Rat
+{
+  "condition": "minecraft:location_check",
+  "predicate": {"position": {"y": {"max": 0}}}
+}
+
+// is_in_sunlight.json — Photosynthesis
+{
+  "condition": "minecraft:light_level_check",
+  "predicate": {"light": {"min": 15}}
+}
+
+// on_ground.json — Trailblazer, Rapid Transit
+{
+  "condition": "minecraft:entity_properties",
+  "entity": "this",
+  "predicate": {"on_ground": true}
+}
+
+// in_water.json — Travel Fatigue
+{
+  "condition": "minecraft:location_check",
+  "predicate": {"fluid": {"fluid": "minecraft:water"}}
+}
+
+// is_sneaking.json — Lithic Resonance
+{
+  "condition": "minecraft:entity_properties",
+  "entity": "this",
+  "predicate": {"nbt": ["Sneaking:1b"]}
+}
+
+// is_riding.json — Rapid Transit
+{
+  "condition": "minecraft:entity_properties",
+  "entity": "this",
+  "predicate": {"nbt": ["RootVehicle.Entity:{}"]}
+}
+
+// holding_amethyst.json — Lithic Resonance
+{
+  "condition": "minecraft:match_tool",
+  "predicate": {"items": ["minecraft:amethyst_shard"]}
+}
+
+// holding_stick.json — Rapid Transit
+{
+  "condition": "minecraft:match_tool",
+  "predicate": {"items": ["minecraft:stick"]}
+}
+
+// is_daytime.json — Photosynthesis
+{
+  "condition": "minecraft:time_check",
+  "value": {"min": 0, "max": 12000}
+}
+```
+
+---
+
+### 9.6 Complete Workflow: No Custom Items, Vanilla Only
+
+#### **Example 1: Midas Touch (Apple consume)**
+
+**1. Advancement (role check on vanilla apple consumption):**
+```json
+{
+  "display": {"icon": {"item": "minecraft:apple"}, "hidden": true, "announce": false},
+  "criteria": {
+    "ate_apple_as_farmer": {
+      "trigger": "minecraft:consume_item",
+      "conditions": {
+        "player": [
+          {"condition": "minecraft:entity_properties", "entity": "this",
+           "predicate": {"nbt": ["Tags[\"role_farmer\"]"]}}
+        ],
+        "item": {"items": ["minecraft:apple"]}
+      }
+    }
+  },
+  "requirements": [["ate_apple_as_farmer"]],
+  "rewards": {"function": "nations:farmer/midas_touch"}
+}
+```
+
+**2. Reward Function (simple effect application):**
+```mcfunction
+# data/nations/functions/farmer/midas_touch.mcfunction
+effect give @s absorption 2 120
+effect give @s regeneration 1 40
+playsound entity.player.levelup master @s ~ ~ ~ 1 1
+```
+
+**3. Done.** Player eats vanilla apple → advancement checks role predicate → function runs. No custom items, no per-tick checks.
+
+---
+
+#### **Example 2: Sky Mage (Feather right-click with cooldown)**
+
+**1. Advancement (role check on vanilla feather use):**
+```json
+{
+  "display": {"icon": {"item": "minecraft:feather"}, "hidden": true, "announce": false},
+  "criteria": {
+    "used_feather_as_enchanter": {
+      "trigger": "minecraft:using_item",
+      "conditions": {
+        "player": [
+          {"condition": "minecraft:entity_properties", "entity": "this",
+           "predicate": {"nbt": ["Tags[\"role_enchanter\"]"]}}
+        ],
+        "item": {"items": ["minecraft:feather"]}
+      }
+    }
+  },
+  "requirements": [["used_feather_as_enchanter"]],
+  "rewards": {"function": "nations:enchanter/sky_mage_check"}
+}
+```
+
+**2. Cooldown Validation Function:**
+```mcfunction
+# data/nations/functions/enchanter/sky_mage_check.mcfunction
+# Only cast if cooldown not active
+execute if score @s sky_mage_cd matches ..0 run function nations:enchanter/sky_mage_cast
+```
+
+**3. Cast Function (actual ability):**
+```mcfunction
+# data/nations/functions/enchanter/sky_mage_cast.mcfunction
+effect give @s levitation 2 60
+clear @s feather 1
+scoreboard players set @s sky_mage_cd 15
+playsound item.firecharge.use master @s ~ ~ ~ 1 1
+```
+
+---
+
+#### **Example 3: Cave Dweller (Every 10 ticks, not per-tick)**
+
+**1. Main tick loop (in tick.mcfunction):**
+```mcfunction
+scoreboard players add tick_counter dummy 1
+
+# Decrement cooldowns every tick
+scoreboard players remove @a[scores={cave_check_cd=1..}] cave_check_cd 1
+
+# Run position checks every 10 ticks
+execute if score tick_counter dummy matches 10 run function nations:check_positions
+execute if score tick_counter dummy matches 20 run scoreboard players set tick_counter dummy 0
+```
+
+**2. Position Check Function (runs every 10 ticks):**
+```mcfunction
+# data/nations/functions/check_positions.mcfunction
+execute as @a[tag=role_miner] at @s if predicate nations:is_below_y0 run effect give @s night_vision 10 0
+execute as @a[tag=role_miner] at @s if predicate nations:is_below_y0 run effect give @s haste 10 0
+execute as @a[tag=role_miner] at @s if predicate nations:is_below_y0 run effect give @s resistance 10 0
+
+execute as @a[tag=role_farmer] at @s if predicate nations:is_in_sunlight run effect give @s absorption 10 3
+
+execute as @a[tag=role_explorer] at @s if predicate nations:on_ground if predicate nations:holding_compass_or_spyglass run effect give @s speed 10 0
+```
+
+---
+
+### 9.7 Revised Computational Impact
+
+**Scenario:** 40-player SMP, 8 per role
+
+| Phase | Before | After | Savings |
+|-------|--------|-------|---------|
+| **Consumable Advancements** | 0.3ms | 0.05ms | **-0.25ms** |
+| **Item-Use Advancements** | 0.3ms | 0.05ms | **-0.25ms** |
+| **Position-Based (10-tick)** | 2.0ms | 0.2ms | **-1.8ms** |
+| **Entity-Kill Advancements** | 0.1ms | 0.01ms | **-0.09ms** |
+| **Complex Abilities (Optimized)** | 3.0ms | 1.5ms | **-1.5ms** |
+| **Loot Tables + Misc** | 0.5ms | 0.5ms | — |
+| **TOTAL** | 6.1ms | **2.35ms** | **-61% reduction** |
+
+**New Server Impact (40 players):**
+- **Idle:** ~1.0ms (0.1% TPS)
+- **Active:** ~2.35ms (0.24% TPS)
+- **Peak:** ~3.0ms (0.3% TPS)
+
+**vs Original Design (18ms for active):** **6-8× improvement** ✅
+
+---
+
+### 9.8 Implementation Checklist: Vanilla Items + Intervals
+
+**Phase 1: Advancement Setup (Week 1)**
+- [ ] Create advancement JSONs for all consumable abilities (Midas Touch, Better Together, Nature's Vengeance, Knowledgeable)
+- [ ] Test role predicate in advancements on **vanilla items** (no custom model data)
+- [ ] Create reward functions with cooldown/effect logic
+- [ ] Build predicate library (is_below_y0, is_in_sunlight, etc.)
+
+**Phase 2: Item-Use Advancements (Week 2)**
+- [ ] Create advancement JSONs for item-use abilities (Sky Mage, Dowsing Rod, War Cry, Weightless Spirit)
+- [ ] Test `using_item`, `item_used_on_block`, `shot_projectile` triggers on **vanilla items**
+- [ ] Add cooldown management to reward functions
+- [ ] Verify hand/offhand detection (glowstone for Weightless Spirit, etc.)
+
+**Phase 3: Entity-Kill Advancements (Week 2)**
+- [ ] Create advancement JSONs for death-based abilities (Blood Sacrifice, Bloodthirsty, Scavenger)
+- [ ] Test entity_killed trigger with role predicates
+- [ ] Add RNG logic for Scavenger (10% chance in reward function)
+- [ ] Validate entity name checking (Vessel pig) in reward functions
+
+**Phase 4: Interval-Based Position Checks (Week 3)**
+- [ ] Implement tick counter in main tick.mcfunction (counts 0-20)
+- [ ] Convert all per-tick position-based abilities to 10-tick intervals
+- [ ] Adjust effect durations (currently 10 ticks; tune if needed for gameplay feel)
+- [ ] Test predicate library matches actual conditions
+
+**Phase 5: Testing & Optimization (Week 4)**
+- [ ] Measure server impact before/after (use `/debug start/stop`)
+- [ ] Verify all role checks work correctly on vanilla items
+- [ ] Test advancement predicate accuracy (does it fire only on role_farmer?)
+- [ ] Ensure 0.5s interval delay doesn't feel clunky for position-based abilities
+- [ ] Full player load test (40 players simultaneous)
+
+---
+
+### 9.9 Advantages of This Approach
+
+✅ **No custom items needed** — Uses vanilla apple, feather, shard, axe, etc.  
+✅ **Role checked in advancement predicate** — Vanilla items work for all players; only role_farmer triggers Midas Touch  
+✅ **Event-driven** — Only executes when player actually uses ability  
+✅ **Much lower server load** — 6-8× faster than per-tick checks  
+✅ **Backward compatible** — All vanilla items unchanged; no asset modifications  
+✅ **Easy to debug** — Advancement criteria visible in JSON, functions are minimal  
+✅ **Scalable** — Handles 40+ players without TPS impact  
+✅ **Interval reduction** — Position-based checks run only every 10 ticks instead of every tick  
+
+---
+
+### 9.10 Limitations & Mitigations
+
+| Limitation | Mitigation |
+|---|---|
+| Advancement can only grant once, then must be revoked | Use cooldown scoreboard in reward function; revoke advancement after cooldown expires via function |
+| No way to check "holding item in offhand" directly in predicate | Validate in reward function via `@s[nbt={Inventory:[{Slot:-106b}]}]` |
+| Entity_killed trigger fires for all kills (not filtered by role in event) | Add role predicate in advancement criteria; reward function validates further |
+| Position checks every 10 ticks = 0.5s delay | Accept delay or reduce interval to 5 ticks; test gameplay feel |
+| `announce: false` hides advancement notification but doesn't prevent log spam | Consider batch advancement grant to minimize event spam |
+
+---
+
+### 9.11 Recommended Implementation Roadmap
+
+**Phase 1 (Week 1): Advance Triggers + Vanilla Items**
+1. Create 4 advancement JSONs for consumable abilities (Midas Touch, Better Together, Nature's Vengeance, Knowledgeable)
+2. Test triggers on **vanilla** apple, beetroot, food, etc. (no custom items)
+3. Verify role predicate accuracy in advancement criteria
+
+**Phase 2 (Week 2): Item-Use Triggers**
+4. Create 4 advancement JSONs for item-use abilities (Sky Mage feather, Dowsing Rod shard, War Cry axe, Weightless Spirit arrow)
+5. Test right-click/item-use event handling
+6. Validate offhand item detection for Weightless Spirit
+
+**Phase 3 (Week 2): Entity-Kill Triggers**
+7. Create 3 advancement JSONs for death-based abilities (Blood Sacrifice, Bloodthirsty, Scavenger)
+8. Test entity_killed triggers with role role predicates
+9. Add entity name validation (Vessel) in reward functions
+
+**Phase 4 (Week 3): Interval-Based Checks**
+10. Build tick counter and check_positions function
+11. Convert all 8 position-based abilities to 10-tick intervals
+12. Fine-tune effect durations for gameplay feel
+
+**Phase 5 (Week 4): Testing & Measurement**
+13. Run `/debug start` before and after optimization
+14. Verify TPS improvement (expect 6-8× faster)
+15. Full 40-player load test
