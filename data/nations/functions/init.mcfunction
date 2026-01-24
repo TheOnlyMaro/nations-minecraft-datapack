@@ -1,6 +1,7 @@
-# nations:init — initialization function (placeholder)
-# Register scoreboards, setup teams, or run one-time setup.
-# TODO: implement initialization logic for roles and data storage
+# nations:init
+# Farmer Branch Initialization
 
-# Example: announce datapack loaded
-say Nations datapack initialized (placeholder)
+scoreboard objectives add nations_temp dummy
+scoreboard objectives add nations_cd_breeding dummy
+
+say Nations Farmer Branch Initialized.

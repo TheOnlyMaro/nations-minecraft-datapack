@@ -1,5 +1,5 @@
-# nations:tick — run each tick (placeholder)
-# TODO: call role handlers, cooldown processors, and periodic checks
+# nations:tick
+# Farmer Branch Tick Loop
 
-# Example: placeholder
-# function nations:roles/process
+# Cooldown Managers
+scoreboard players remove @a[scores={nations_cd_breeding=1..}] nations_cd_breeding 1
