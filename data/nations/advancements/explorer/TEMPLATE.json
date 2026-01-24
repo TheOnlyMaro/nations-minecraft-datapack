@@ -1,0 +1,26 @@
+{
+  "display": {
+    "icon": {"item": "minecraft:compass"},
+    "title": "Ability Name",
+    "description": "Description of the ability",
+    "hidden": true,
+    "announce": false
+  },
+  "criteria": {
+    "trigger_name": {
+      "trigger": "minecraft:item_used_on_block",
+      "conditions": {
+        "player": [
+          {
+            "condition": "minecraft:entity_properties",
+            "entity": "this",
+            "predicate": {"nbt": ["Tags[\"role_explorer\"]"]}
+          }
+        ],
+        "item": {"items": ["minecraft:amethyst_shard"]}
+      }
+    }
+  },
+  "requirements": [["trigger_name"]],
+  "rewards": {"function": "nations:explorer/ability_name"}
+}
