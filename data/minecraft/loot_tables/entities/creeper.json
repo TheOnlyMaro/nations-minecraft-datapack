@@ -6,6 +6,7 @@
             "entries": [
                 {
                     "type": "minecraft:item",
+                    "name": "minecraft:gunpowder",
                     "functions": [
                         {
                             "function": "minecraft:set_count",
@@ -22,8 +23,7 @@
                                 "max": 1
                             }
                         }
-                    ],
-                    "name": "minecraft:gunpowder"
+                    ]
                 }
             ]
         },
@@ -42,17 +42,634 @@
             "entries": [
                 {
                     "type": "minecraft:item",
+                    "weight": 20,
+                    "name": "minecraft:gunpowder",
                     "functions": [
                         {
                             "function": "minecraft:set_count",
                             "count": {
                                 "min": 1,
                                 "max": 2
-                            },
-                            "add": false
+                            }
+                        }
+                    ]
+                },
+                {
+                    "type": "minecraft:tag",
+                    "weight": 5,
+                    "name": "minecraft:creeper_drop_music_discs",
+                    "expand": true
+                },
+                {
+                    "type": "minecraft:item",
+                    "weight": 2,
+                    "name": "minecraft:creeper_head"
+                },
+                {
+                    "type": "minecraft:item",
+                    "weight": 10,
+                    "name": "minecraft:tnt",
+                    "functions": [
+                        {
+                            "function": "minecraft:set_count",
+                            "count": 1
                         }
                     ],
-                    "name": "minecraft:gunpowder"
+                    "conditions": [
+                        {
+                            "condition": "minecraft:entity_properties",
+                            "entity": "this",
+                            "predicate": {
+                                "equipment": {
+                                    "mainhand": {
+                                        "items": [
+                                            "minecraft:tnt"
+                                        ]
+                                    }
+                                }
+                            }
+                        }
+                    ]
+                },
+                {
+                    "type": "minecraft:item",
+                    "weight": 10,
+                    "name": "minecraft:leather_helmet",
+                    "functions": [
+                        {
+                            "function": "minecraft:set_damage",
+                            "damage": {
+                                "min": 0.1,
+                                "max": 0.9
+                            }
+                        }
+                    ],
+                    "conditions": [
+                        {
+                            "condition": "minecraft:entity_properties",
+                            "entity": "this",
+                            "predicate": {
+                                "equipment": {
+                                    "head": {
+                                        "items": [
+                                            "minecraft:leather_helmet"
+                                        ]
+                                    }
+                                }
+                            }
+                        }
+                    ]
+                },
+                {
+                    "type": "minecraft:item",
+                    "weight": 10,
+                    "name": "minecraft:leather_chestplate",
+                    "functions": [
+                        {
+                            "function": "minecraft:set_damage",
+                            "damage": {
+                                "min": 0.1,
+                                "max": 0.9
+                            }
+                        }
+                    ],
+                    "conditions": [
+                        {
+                            "condition": "minecraft:entity_properties",
+                            "entity": "this",
+                            "predicate": {
+                                "equipment": {
+                                    "chest": {
+                                        "items": [
+                                            "minecraft:leather_chestplate"
+                                        ]
+                                    }
+                                }
+                            }
+                        }
+                    ]
+                },
+                {
+                    "type": "minecraft:item",
+                    "weight": 10,
+                    "name": "minecraft:leather_leggings",
+                    "functions": [
+                        {
+                            "function": "minecraft:set_damage",
+                            "damage": {
+                                "min": 0.1,
+                                "max": 0.9
+                            }
+                        }
+                    ],
+                    "conditions": [
+                        {
+                            "condition": "minecraft:entity_properties",
+                            "entity": "this",
+                            "predicate": {
+                                "equipment": {
+                                    "legs": {
+                                        "items": [
+                                            "minecraft:leather_leggings"
+                                        ]
+                                    }
+                                }
+                            }
+                        }
+                    ]
+                },
+                {
+                    "type": "minecraft:item",
+                    "weight": 10,
+                    "name": "minecraft:leather_boots",
+                    "functions": [
+                        {
+                            "function": "minecraft:set_damage",
+                            "damage": {
+                                "min": 0.1,
+                                "max": 0.9
+                            }
+                        }
+                    ],
+                    "conditions": [
+                        {
+                            "condition": "minecraft:entity_properties",
+                            "entity": "this",
+                            "predicate": {
+                                "equipment": {
+                                    "feet": {
+                                        "items": [
+                                            "minecraft:leather_boots"
+                                        ]
+                                    }
+                                }
+                            }
+                        }
+                    ]
+                },
+                {
+                    "type": "minecraft:item",
+                    "weight": 10,
+                    "name": "minecraft:golden_helmet",
+                    "functions": [
+                        {
+                            "function": "minecraft:set_damage",
+                            "damage": {
+                                "min": 0.1,
+                                "max": 0.9
+                            }
+                        }
+                    ],
+                    "conditions": [
+                        {
+                            "condition": "minecraft:entity_properties",
+                            "entity": "this",
+                            "predicate": {
+                                "equipment": {
+                                    "head": {
+                                        "items": [
+                                            "minecraft:golden_helmet"
+                                        ]
+                                    }
+                                }
+                            }
+                        }
+                    ]
+                },
+                {
+                    "type": "minecraft:item",
+                    "weight": 10,
+                    "name": "minecraft:golden_chestplate",
+                    "functions": [
+                        {
+                            "function": "minecraft:set_damage",
+                            "damage": {
+                                "min": 0.1,
+                                "max": 0.9
+                            }
+                        }
+                    ],
+                    "conditions": [
+                        {
+                            "condition": "minecraft:entity_properties",
+                            "entity": "this",
+                            "predicate": {
+                                "equipment": {
+                                    "chest": {
+                                        "items": [
+                                            "minecraft:golden_chestplate"
+                                        ]
+                                    }
+                                }
+                            }
+                        }
+                    ]
+                },
+                {
+                    "type": "minecraft:item",
+                    "weight": 10,
+                    "name": "minecraft:golden_leggings",
+                    "functions": [
+                        {
+                            "function": "minecraft:set_damage",
+                            "damage": {
+                                "min": 0.1,
+                                "max": 0.9
+                            }
+                        }
+                    ],
+                    "conditions": [
+                        {
+                            "condition": "minecraft:entity_properties",
+                            "entity": "this",
+                            "predicate": {
+                                "equipment": {
+                                    "legs": {
+                                        "items": [
+                                            "minecraft:golden_leggings"
+                                        ]
+                                    }
+                                }
+                            }
+                        }
+                    ]
+                },
+                {
+                    "type": "minecraft:item",
+                    "weight": 10,
+                    "name": "minecraft:golden_boots",
+                    "functions": [
+                        {
+                            "function": "minecraft:set_damage",
+                            "damage": {
+                                "min": 0.1,
+                                "max": 0.9
+                            }
+                        }
+                    ],
+                    "conditions": [
+                        {
+                            "condition": "minecraft:entity_properties",
+                            "entity": "this",
+                            "predicate": {
+                                "equipment": {
+                                    "feet": {
+                                        "items": [
+                                            "minecraft:golden_boots"
+                                        ]
+                                    }
+                                }
+                            }
+                        }
+                    ]
+                },
+                {
+                    "type": "minecraft:item",
+                    "weight": 10,
+                    "name": "minecraft:chainmail_helmet",
+                    "functions": [
+                        {
+                            "function": "minecraft:set_damage",
+                            "damage": {
+                                "min": 0.1,
+                                "max": 0.9
+                            }
+                        }
+                    ],
+                    "conditions": [
+                        {
+                            "condition": "minecraft:entity_properties",
+                            "entity": "this",
+                            "predicate": {
+                                "equipment": {
+                                    "head": {
+                                        "items": [
+                                            "minecraft:chainmail_helmet"
+                                        ]
+                                    }
+                                }
+                            }
+                        }
+                    ]
+                },
+                {
+                    "type": "minecraft:item",
+                    "weight": 10,
+                    "name": "minecraft:chainmail_chestplate",
+                    "functions": [
+                        {
+                            "function": "minecraft:set_damage",
+                            "damage": {
+                                "min": 0.1,
+                                "max": 0.9
+                            }
+                        }
+                    ],
+                    "conditions": [
+                        {
+                            "condition": "minecraft:entity_properties",
+                            "entity": "this",
+                            "predicate": {
+                                "equipment": {
+                                    "chest": {
+                                        "items": [
+                                            "minecraft:chainmail_chestplate"
+                                        ]
+                                    }
+                                }
+                            }
+                        }
+                    ]
+                },
+                {
+                    "type": "minecraft:item",
+                    "weight": 10,
+                    "name": "minecraft:chainmail_leggings",
+                    "functions": [
+                        {
+                            "function": "minecraft:set_damage",
+                            "damage": {
+                                "min": 0.1,
+                                "max": 0.9
+                            }
+                        }
+                    ],
+                    "conditions": [
+                        {
+                            "condition": "minecraft:entity_properties",
+                            "entity": "this",
+                            "predicate": {
+                                "equipment": {
+                                    "legs": {
+                                        "items": [
+                                            "minecraft:chainmail_leggings"
+                                        ]
+                                    }
+                                }
+                            }
+                        }
+                    ]
+                },
+                {
+                    "type": "minecraft:item",
+                    "weight": 10,
+                    "name": "minecraft:chainmail_boots",
+                    "functions": [
+                        {
+                            "function": "minecraft:set_damage",
+                            "damage": {
+                                "min": 0.1,
+                                "max": 0.9
+                            }
+                        }
+                    ],
+                    "conditions": [
+                        {
+                            "condition": "minecraft:entity_properties",
+                            "entity": "this",
+                            "predicate": {
+                                "equipment": {
+                                    "feet": {
+                                        "items": [
+                                            "minecraft:chainmail_boots"
+                                        ]
+                                    }
+                                }
+                            }
+                        }
+                    ]
+                },
+                {
+                    "type": "minecraft:item",
+                    "weight": 10,
+                    "name": "minecraft:iron_helmet",
+                    "functions": [
+                        {
+                            "function": "minecraft:set_damage",
+                            "damage": {
+                                "min": 0.1,
+                                "max": 0.9
+                            }
+                        }
+                    ],
+                    "conditions": [
+                        {
+                            "condition": "minecraft:entity_properties",
+                            "entity": "this",
+                            "predicate": {
+                                "equipment": {
+                                    "head": {
+                                        "items": [
+                                            "minecraft:iron_helmet"
+                                        ]
+                                    }
+                                }
+                            }
+                        }
+                    ]
+                },
+                {
+                    "type": "minecraft:item",
+                    "weight": 10,
+                    "name": "minecraft:iron_chestplate",
+                    "functions": [
+                        {
+                            "function": "minecraft:set_damage",
+                            "damage": {
+                                "min": 0.1,
+                                "max": 0.9
+                            }
+                        }
+                    ],
+                    "conditions": [
+                        {
+                            "condition": "minecraft:entity_properties",
+                            "entity": "this",
+                            "predicate": {
+                                "equipment": {
+                                    "chest": {
+                                        "items": [
+                                            "minecraft:iron_chestplate"
+                                        ]
+                                    }
+                                }
+                            }
+                        }
+                    ]
+                },
+                {
+                    "type": "minecraft:item",
+                    "weight": 10,
+                    "name": "minecraft:iron_leggings",
+                    "functions": [
+                        {
+                            "function": "minecraft:set_damage",
+                            "damage": {
+                                "min": 0.1,
+                                "max": 0.9
+                            }
+                        }
+                    ],
+                    "conditions": [
+                        {
+                            "condition": "minecraft:entity_properties",
+                            "entity": "this",
+                            "predicate": {
+                                "equipment": {
+                                    "legs": {
+                                        "items": [
+                                            "minecraft:iron_leggings"
+                                        ]
+                                    }
+                                }
+                            }
+                        }
+                    ]
+                },
+                {
+                    "type": "minecraft:item",
+                    "weight": 10,
+                    "name": "minecraft:iron_boots",
+                    "functions": [
+                        {
+                            "function": "minecraft:set_damage",
+                            "damage": {
+                                "min": 0.1,
+                                "max": 0.9
+                            }
+                        }
+                    ],
+                    "conditions": [
+                        {
+                            "condition": "minecraft:entity_properties",
+                            "entity": "this",
+                            "predicate": {
+                                "equipment": {
+                                    "feet": {
+                                        "items": [
+                                            "minecraft:iron_boots"
+                                        ]
+                                    }
+                                }
+                            }
+                        }
+                    ]
+                },
+                {
+                    "type": "minecraft:item",
+                    "weight": 10,
+                    "name": "minecraft:diamond_helmet",
+                    "functions": [
+                        {
+                            "function": "minecraft:set_damage",
+                            "damage": {
+                                "min": 0.1,
+                                "max": 0.9
+                            }
+                        }
+                    ],
+                    "conditions": [
+                        {
+                            "condition": "minecraft:entity_properties",
+                            "entity": "this",
+                            "predicate": {
+                                "equipment": {
+                                    "head": {
+                                        "items": [
+                                            "minecraft:diamond_helmet"
+                                        ]
+                                    }
+                                }
+                            }
+                        }
+                    ]
+                },
+                {
+                    "type": "minecraft:item",
+                    "weight": 10,
+                    "name": "minecraft:diamond_chestplate",
+                    "functions": [
+                        {
+                            "function": "minecraft:set_damage",
+                            "damage": {
+                                "min": 0.1,
+                                "max": 0.9
+                            }
+                        }
+                    ],
+                    "conditions": [
+                        {
+                            "condition": "minecraft:entity_properties",
+                            "entity": "this",
+                            "predicate": {
+                                "equipment": {
+                                    "chest": {
+                                        "items": [
+                                            "minecraft:diamond_chestplate"
+                                        ]
+                                    }
+                                }
+                            }
+                        }
+                    ]
+                },
+                {
+                    "type": "minecraft:item",
+                    "weight": 10,
+                    "name": "minecraft:diamond_leggings",
+                    "functions": [
+                        {
+                            "function": "minecraft:set_damage",
+                            "damage": {
+                                "min": 0.1,
+                                "max": 0.9
+                            }
+                        }
+                    ],
+                    "conditions": [
+                        {
+                            "condition": "minecraft:entity_properties",
+                            "entity": "this",
+                            "predicate": {
+                                "equipment": {
+                                    "legs": {
+                                        "items": [
+                                            "minecraft:diamond_leggings"
+                                        ]
+                                    }
+                                }
+                            }
+                        }
+                    ]
+                },
+                {
+                    "type": "minecraft:item",
+                    "weight": 10,
+                    "name": "minecraft:diamond_boots",
+                    "functions": [
+                        {
+                            "function": "minecraft:set_damage",
+                            "damage": {
+                                "min": 0.1,
+                                "max": 0.9
+                            }
+                        }
+                    ],
+                    "conditions": [
+                        {
+                            "condition": "minecraft:entity_properties",
+                            "entity": "this",
+                            "predicate": {
+                                "equipment": {
+                                    "feet": {
+                                        "items": [
+                                            "minecraft:diamond_boots"
+                                        ]
+                                    }
+                                }
+                            }
+                        }
+                    ]
                 }
             ]
         }

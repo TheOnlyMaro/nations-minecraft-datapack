@@ -6,6 +6,7 @@
             "entries": [
                 {
                     "type": "minecraft:item",
+                    "name": "minecraft:string",
                     "functions": [
                         {
                             "function": "minecraft:set_count",
@@ -22,8 +23,7 @@
                                 "max": 1
                             }
                         }
-                    ],
-                    "name": "minecraft:string"
+                    ]
                 }
             ]
         },
@@ -32,6 +32,7 @@
             "entries": [
                 {
                     "type": "minecraft:item",
+                    "name": "minecraft:spider_eye",
                     "functions": [
                         {
                             "function": "minecraft:set_count",
@@ -53,8 +54,7 @@
                         {
                             "condition": "minecraft:killed_by_player"
                         }
-                    ],
-                    "name": "minecraft:spider_eye"
+                    ]
                 }
             ]
         },
@@ -73,17 +73,50 @@
             "entries": [
                 {
                     "type": "minecraft:item",
+                    "weight": 20,
+                    "name": "minecraft:string",
                     "functions": [
                         {
                             "function": "minecraft:set_count",
                             "count": {
                                 "min": 1,
                                 "max": 2
-                            },
-                            "add": false
+                            }
                         }
-                    ],
-                    "name": "minecraft:string"
+                    ]
+                },
+                {
+                    "type": "minecraft:item",
+                    "weight": 10,
+                    "name": "minecraft:spider_eye",
+                    "functions": [
+                        {
+                            "function": "minecraft:set_count",
+                            "count": 1
+                        }
+                    ]
+                },
+                {
+                    "type": "minecraft:item",
+                    "weight": 5,
+                    "name": "minecraft:cobweb",
+                    "functions": [
+                        {
+                            "function": "minecraft:set_count",
+                            "count": 1
+                        }
+                    ]
+                },
+                {
+                    "type": "minecraft:item",
+                    "weight": 2,
+                    "name": "minecraft:fermented_spider_eye",
+                    "functions": [
+                        {
+                            "function": "minecraft:set_count",
+                            "count": 1
+                        }
+                    ]
                 }
             ]
         }
