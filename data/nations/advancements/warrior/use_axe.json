@@ -1,0 +1,24 @@
+{
+    "criteria": {
+        "use_axe": {
+            "trigger": "minecraft:item_used_on_block",
+            "conditions": {
+                "item": {
+                    "tag": "minecraft:axes"
+                },
+                "player": [
+                    {
+                        "condition": "minecraft:entity_properties",
+                        "entity": "this",
+                        "predicate": {
+                            "nbt": "{Tags:['role_warrior']}"
+                        }
+                    }
+                ]
+            }
+        }
+    },
+    "rewards": {
+        "function": "nations:warrior/war_cry"
+    }
+}
