@@ -22,6 +22,19 @@
                                     "properties": {
                                         "age": "7"
                                     }
+                                },
+                                {
+                                    "condition": "minecraft:any_of",
+                                    "terms": [
+                                        {
+                                            "condition": "minecraft:reference",
+                                            "name": "nations:farmer/is_farmer"
+                                        },
+                                        {
+                                            "condition": "minecraft:random_chance",
+                                            "chance": 0.75
+                                        }
+                                    ]
                                 }
                             ],
                             "functions": [
