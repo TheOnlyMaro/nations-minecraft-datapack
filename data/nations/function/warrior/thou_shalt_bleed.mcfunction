@@ -7,7 +7,7 @@ execute store result score @s nations_temp run data get entity @s SelectedItemSl
 
 # Check if blocking (1 if true, 0 if false)
 scoreboard players set @s nations_is_blocking 0
-execute if predicate nations:warrior/is_blocking run scoreboard players set @s nations_is_blocking 1
+execute if predicate nations:is_blocking run scoreboard players set @s nations_is_blocking 1
 
 # 2. Detect State Change (Stop Blocking or Slot Change)
 # Check if Slot Changed: nations_temp != nations_slot_cache
@@ -20,4 +20,4 @@ scoreboard players operation @s nations_slot_cache = @s nations_temp
 scoreboard players operation @s nations_was_blocking = @s nations_is_blocking
 
 # 4. Apply Effect (If Blocking and Holding Sword)
-execute if score @s nations_is_blocking matches 1 if predicate nations:warrior/is_holding_sword run function nations:warrior/tsb_do_apply
+execute if score @s nations_is_blocking matches 1 if predicate nations:is_holding_sword run function nations:warrior/tsb_do_apply

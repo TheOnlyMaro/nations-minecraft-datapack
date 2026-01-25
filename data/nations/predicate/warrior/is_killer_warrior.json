@@ -1,7 +1,7 @@
 {
     "condition": "minecraft:entity_properties",
-    "entity": "killer",
+    "entity": "attacker",
     "predicate": {
-        "nbt": "{Tags:['role_warrior']}"
+        "nbt": "{Tags:[\"role_warrior\"]}"
     }
 }

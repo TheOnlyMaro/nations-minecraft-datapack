@@ -321,7 +321,7 @@ All roles are assigned via player NBT tags, persisted for the lifetime of the pl
 - **Adrenaline Rush:** At 2.5 Hearts, gain Speed II for 5s (Cooldown: 60s).
   * **Trigger:** Ticking check for `role_warrior` tag + health <= 5 (2.5 hearts).
   * **Mechanism:** Applies `minecraft:speed` (2 levels) for 100 ticks (5s) when threshold met.
-  * **Cooldown:** 60 ticks (3s) between activations (prevents spam).
+  * **Cooldown:** 1200 ticks (60s) between activations (prevents spam).
   * **Removal:** Speed removed after duration expires or player heals above 5 health.
   * **Audio:** `entity.generic.drink` sound on activation.
 
@@ -337,10 +337,10 @@ All roles are assigned via player NBT tags, persisted for the lifetime of the pl
   * **Mechanics:** If RNG passes (1d10 <= 1), spawn armor/weapon item at mob death location (full durability, no enchantments).
   * **Audio:** None.
 
-- **War Cry:** Right-clicking an Axe gives Strength I to nearby team members for 5s.
-  * **Trigger:** `PlayerInteractItem` event (axe) for `role_warrior` player.
+- **War Cry:** Right-clicking an Axe on a block gives Strength I to nearby team members for 5s.
+  * **Trigger:** `item_used_on_block` event (axe) for `role_warrior` player.
   * **Mechanism:** Scans 10-block radius for nearby players; applies `minecraft:strength` (1 level) for 100 ticks (5s) to all allies.
-  * **Cooldown:** 120 ticks (2m global team cooldown) — shared across all Warriors to prevent spam.
+  * **Cooldown:** 2400 ticks (2m global team cooldown) — shared across all Warriors to prevent spam.
   * **Detection:** Checks team affiliation via scoreboard or NBT tag.
   * **Audio:** `entity.evoker.cast_spell` sound with particle effect.
 
@@ -370,7 +370,7 @@ All roles are assigned via player NBT tags, persisted for the lifetime of the pl
 
 - **Damage Events:** PvE abilities (Nature's Vengeance, Adrenaline Rush) check environment context to avoid PvP abuse.
 
-- **Predicate Filtering:** All role checks use `data/nations/predicates/is_<role>.json` for consistent role detection across functions.
+- **Predicate Filtering:** General role checks use `data/nations/predicates/is_<role>.json` for consistent role detection. Specialized predicates (e.g., `warrior/is_killer_warrior.json` for loot tables) are organized in subdirectories.
 
 - **Team Coordination:** Team abilities (War Cry, Better Together) use scoreboard team tracking for efficient proximity checks.
 
