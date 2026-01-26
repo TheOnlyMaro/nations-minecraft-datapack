@@ -313,21 +313,23 @@ All roles are assigned via player NBT tags, persisted for the lifetime of the pl
 
 **Approved Abilities:**
 
-- **Thou Shalt Bleed:** Right-clicking with shield while holding a sword grants it Sharpness II.
-  * **Trigger:** Right-click with shield (advancement-based, no tick overhead for activation).
-  * **Mechanism:** Adds `nations_blessed_blade` NBT tag and Sharpness II enchantment to mainhand sword.
+- **Thou Shalt Bleed:** Right-clicking with shield while holding a sword grants it Sharpness II equivalent (+1.5 Dmg).
+  * **Trigger:** Right-click with shield (advancement-based `use_shield`, no tick overhead for activation).
+  * **Effect:** Grants +1.5 Attack Damage (Sharpness II equivalent) to your sword for that engagement.
+  * **Mechanism:** Adds `nations_blessed_blade` NBT tag and Attribute Modifier to mainhand sword.
   * **Duration:** Permanent until removal conditions met.
   * **Removal Conditions:**
     - Sword is unequipped from mainhand slot
     - Sword is held by a non-warrior player
   * **Detection:** Tick function checks all players with blessed blades for removal conditions.
   * **Audio:** `block.grindstone.use` sound on activation with enchant particles.
-  * **Damage Bonus:** Sharpness II adds +2.5 damage per hit.
+  * **Cooldown:** None (State-based; removes when you switch items).
 
 - **Vanguard:** Base Health = 24 (12 Hearts).
-  * **Mechanism:** Sets `generic.max_health` to 24 on first tag assignment (`role_warrior` added).
+  * **Effect:** +2 Hearts (24 Max HP).
+  * **Mechanism:** Sets `max_health` to 24 on first tag assignment (`role_warrior` added) or join.
   * **Persistence:** Health modifier persists across sessions via player NBT attribute storage.
-  * **Effect:** Grants +2 health bar hearts compared to default players (20 health).
+  * **Cooldown:** None (Always Active).
 
 - **Bounty Hunter:** +50% Mob Loot.
   * **Implementation:** Custom loot tables check for `role_warrior` tag on killer.
@@ -335,41 +337,46 @@ All roles are assigned via player NBT tags, persisted for the lifetime of the pl
   * **Mechanics:** Loot table entries apply 1.5x multiplier to item counts (stacks with Looting enchantment).
   * **Audio:** None.
 
-- **Adrenaline Rush:** At 2.5 Hearts, gain Speed II for 5s (Cooldown: 60s).
-  * **Trigger:** Ticking check for `role_warrior` tag + health <= 5 (2.5 hearts).
+- **Adrenaline Rush:** At 2.5 Hearts, gain Speed II for 5s.
+  * **Effect:** Grants Speed II for 5s when taking damage at low health (≤2.5 hearts).
+  * **Trigger:** Advancement `took_damage` triggers function `adrenaline_rush`.
   * **Mechanism:** Applies `minecraft:speed` (2 levels) for 100 ticks (5s) when threshold met.
   * **Cooldown:** 1200 ticks (60s) between activations (prevents spam).
   * **Removal:** Speed removed after duration expires or player heals above 5 health.
   * **Audio:** `entity.generic.drink` sound on activation.
 
 - **Bloodthirsty:** Player kill heals for 1.5 Hearts.
-  * **Trigger:** `EntityDeath` event for player killed by `role_warrior` player.
+  * **Effect:** Heals 1.5 Hearts immediately upon killing a player.
+  * **Trigger:** Advancement `killed_player` triggers function `bloodthirsty`.
   * **Mechanism:** Restores 3 health points (1.5 hearts) to killer.
   * **Cooldown:** None (per-kill).
   * **Audio:** `entity.player.levelup` sound.
 
-- **Scavenger:** 10% chance for mobs to drop armor/weapons at full durability (Unenchanted).
-  * **Trigger:** Mob death event (`EntityDeath`).
-  * **Implementation:** Loot table adds conditional entry; 1d10 RNG for `role_warrior` killer.
-  * **Mechanics:** If RNG passes (1d10 <= 1), spawn armor/weapon item at mob death location (full durability, no enchantments).
-  * **Audio:** None.
-
-- **War Cry:** Right-clicking an Axe on a block gives Strength I to nearby team members for 5s.
-  * **Trigger:** `item_used_on_block` event (axe) for `role_warrior` player.
-  * **Mechanism:** Scans 10-block radius for nearby players; applies `minecraft:strength` (1 level) for 100 ticks (5s) to all allies.
-  * **Cooldown:** 2400 ticks (2m global team cooldown) — shared across all Warriors to prevent spam.
-  * **Detection:** Checks team affiliation via scoreboard or NBT tag.
-  * **Audio:** `entity.evoker.cast_spell` sound with particle effect.
+- **War Cry:** Use a War Horn (Right-click) to give Strength I to nearby team members for 8s.
+  * **Trigger:** Use a War Horn (advancement `use_goat_horn` detects usage).
+  * **Effect:** Grants Strength I (+3.0 damage) for 8s to all teammates within 20 blocks.
+  * **Acquisition:** Craftable by Warriors only (Shears + Pointed Dripstone). Non-warriors cannot hold the horn.
+  * **Mechanism:** Scans 20-block radius for nearby players with `role_warrior` tag; applies `minecraft:strength` (1 level) for 160 ticks (8s).
+  * **Cooldown:** 120 seconds (Global team cooldown).
+  * **Audio:** `minecraft:item.goat_horn.play` sound with particle effect.
 
 
 
 **Soft-Nerf (Trade Incentive):**
 
-- **Fragile Shields:** Non-Combatants shields take 2x durability damage.
+- **Fragile Shields:** Non-Warriors will receive 2x shield durability damage!
   * **Implementation:** Custom damage/durability event listener checks for `role_warrior` tag.
   * **Blocks affected:** All shield types.
   * **Mechanic:** On shield hit, check `!role_warrior` predicate; if true, apply 2x durability loss multiplier.
   * **Audio:** None.
+
+#### **Comparison**
+*   **Diamond Sword**: 7 Attack damage
+*   Diamond Sword **+ Thou Shalt Bleed**: 8.5 Attack damage
+*   Diamond Sword + Thou Shalt Bleed **+ War Cry**: 11.5 Attack damage
+*   Overall Effect: **60% Damage bonus**
+
+_Fighting with a Wooden Sword with both abilities on is stronger than fighting with a Netherite Sword!_
 
 
 

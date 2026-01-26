@@ -10,7 +10,7 @@
                 {
                     "type": "minecraft:attack_damage",
                     "id": "nations:blessed_blade_damage",
-                    "amount": 2.5,
+                    "amount": 1.5,
                     "operation": "add_value",
                     "slot": "mainhand"
                 }
