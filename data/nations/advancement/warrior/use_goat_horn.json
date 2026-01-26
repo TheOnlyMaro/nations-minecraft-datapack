@@ -1,0 +1,25 @@
+{
+    "criteria": {
+        "use_horn": {
+            "trigger": "minecraft:using_item",
+            "conditions": {
+                "item": {
+                    "items": "minecraft:goat_horn"
+                },
+                "player": [
+                    {
+                        "condition": "minecraft:entity_properties",
+                        "entity": "this",
+                        "predicate": {
+                            "type": "minecraft:player",
+                            "nbt": "{Tags:[\"role_warrior\"]}"
+                        }
+                    }
+                ]
+            }
+        }
+    },
+    "rewards": {
+        "function": "nations:warrior/war_cry"
+    }
+}

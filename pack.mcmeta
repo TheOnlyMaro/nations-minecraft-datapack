@@ -1,6 +1,10 @@
 {
   "pack": {
-    "pack_format": 61,
-    "description": "nations-minecraft-datapack — SMP Role-Based Datapack (placeholder structure)"
+    "pack_format": 69,
+    "description": "Nations datapack",
+    "supported_formats": {
+      "max_inclusive": 75,
+      "min_inclusive": 55
+    }
   }
 }

@@ -1,8 +1,0 @@
-{
-  "type": "minecraft:crafting_shapeless",
-  "ingredients": [
-    { "item": "minecraft:glass_bottle" },
-    { "item": "minecraft:experience_bottle" }
-  ],
-  "result": { "item": "minecraft:experience_bottle", "count": 1 }
-}
