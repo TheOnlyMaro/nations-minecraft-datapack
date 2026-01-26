@@ -1,10 +1,10 @@
 # nations:warrior/war_cry
-# Triggered by Right-Clicking a block with an Axe
+# Triggered by using a Goat Horn / War Horn
 # Effect: Strength I for 5s to nearby team members
 # Global Cooldown: 120s (2400 ticks)
 
 # 1. Revoke Advancement (So it can trigger again)
-advancement revoke @s only nations:warrior/use_axe
+advancement revoke @s only nations:warrior/use_goat_horn
 
 # 2. Check Global Cooldown
 execute if score #GLOBAL nations_global_warcry_cd matches 1.. run tellraw @s {"text":"War Cry is on cooldown!","color":"red"}

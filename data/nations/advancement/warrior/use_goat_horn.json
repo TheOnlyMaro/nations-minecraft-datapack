@@ -4,7 +4,7 @@
             "trigger": "minecraft:using_item",
             "conditions": {
                 "item": {
-                    "items": "#minecraft:goat_horns"
+                    "items": "minecraft:goat_horn"
                 },
                 "player": [
                     {

@@ -1,0 +1,35 @@
+{
+    "criteria": {
+        "has_war_horn": {
+            "trigger": "minecraft:inventory_changed",
+            "conditions": {
+                "items": [
+                    {
+                        "items": "minecraft:goat_horn",
+                        "components": {
+                            "minecraft:custom_data": {
+                                "nations_war_horn": 1
+                            }
+                        }
+                    }
+                ],
+                "player": [
+                    {
+                        "condition": "minecraft:inverted",
+                        "term": {
+                            "condition": "minecraft:entity_properties",
+                            "entity": "this",
+                            "predicate": {
+                                "type": "minecraft:player",
+                                "nbt": "{Tags:[\"role_warrior\"]}"
+                            }
+                        }
+                    }
+                ]
+            }
+        }
+    },
+    "rewards": {
+        "function": "nations:warrior/remove_illegal_war_horn"
+    }
+}
