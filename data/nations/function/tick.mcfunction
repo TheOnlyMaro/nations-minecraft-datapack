@@ -11,6 +11,7 @@ scoreboard players remove #GLOBAL nations_global_warcry_cd 1
 
 # Farmer Branch Tick Loop
 execute as @a[tag=role_farmer] run function nations:farmer/photosynthesis
+execute as @a[tag=role_farmer] run function nations:farmer/convert_held_beetroots
 
 
 # Persistent Roles / Markers
