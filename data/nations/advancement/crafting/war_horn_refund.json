@@ -1,0 +1,13 @@
+{
+    "criteria": {
+        "craft_war_horn": {
+            "trigger": "minecraft:recipe_crafted",
+            "conditions": {
+                "recipe_id": "nations:war_horn"
+            }
+        }
+    },
+    "rewards": {
+        "function": "nations:crafting/refund_shears"
+    }
+}

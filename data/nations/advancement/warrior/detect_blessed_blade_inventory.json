@@ -1,0 +1,21 @@
+{
+    "criteria": {
+        "has_blessed_blade": {
+            "trigger": "minecraft:inventory_changed",
+            "conditions": {
+                "items": [
+                    {
+                        "components": {
+                            "minecraft:custom_data": {
+                                "nations_blessed_blade": 1
+                            }
+                        }
+                    }
+                ]
+            }
+        }
+    },
+    "rewards": {
+        "function": "nations:warrior/thou_shalt_bleed_validate"
+    }
+}

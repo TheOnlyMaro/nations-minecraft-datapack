@@ -1,0 +1,22 @@
+{
+    "type": "minecraft:crafting_shapeless",
+    "ingredients": [
+        "minecraft:shears",
+        "minecraft:pointed_dripstone"
+    ],
+    "result": {
+        "id": "minecraft:goat_horn",
+        "count": 1,
+        "components": {
+            "minecraft:instrument": "minecraft:ponder_goat_horn",
+            "minecraft:custom_name": {
+                "text": "War Horn",
+                "color": "gold",
+                "italic": false
+            },
+            "minecraft:custom_data": {
+                "nations_war_horn": 1
+            }
+        }
+    }
+}

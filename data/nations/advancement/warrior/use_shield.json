@@ -1,0 +1,27 @@
+{
+    "criteria": {
+        "use_shield": {
+            "trigger": "minecraft:using_item",
+            "conditions": {
+                "item": {
+                    "items": [
+                        "minecraft:shield"
+                    ]
+                },
+                "player": [
+                    {
+                        "condition": "minecraft:entity_properties",
+                        "entity": "this",
+                        "predicate": {
+                            "type": "minecraft:player",
+                            "nbt": "{Tags:[\"role_warrior\"]}"
+                        }
+                    }
+                ]
+            }
+        }
+    },
+    "rewards": {
+        "function": "nations:warrior/thou_shalt_bleed_activate"
+    }
+}
