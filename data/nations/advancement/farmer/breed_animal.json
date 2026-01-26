@@ -1,0 +1,21 @@
+{
+  "criteria": {
+    "breed_animal": {
+      "trigger": "minecraft:bred_animals",
+      "conditions": {
+        "player": [
+          {
+            "condition": "minecraft:entity_properties",
+            "entity": "this",
+            "predicate": {
+              "nbt": "{Tags:['role_farmer']}"
+            }
+          }
+        ]
+      }
+    }
+  },
+  "rewards": {
+    "function": "nations:farmer/breeding_mastery"
+  }
+}

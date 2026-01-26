@@ -1,0 +1,33 @@
+{
+    "criteria": {
+        "place_composter": {
+            "trigger": "minecraft:placed_block",
+            "conditions": {
+                "player": [
+                    {
+                        "condition": "minecraft:entity_properties",
+                        "entity": "this",
+                        "predicate": {
+                            "nbt": "{Tags:['role_farmer']}"
+                        }
+                    }
+                ],
+                "location": [
+                    {
+                        "condition": "minecraft:location_check",
+                        "predicate": {
+                            "block": {
+                                "blocks": [
+                                    "minecraft:composter"
+                                ]
+                            }
+                        }
+                    }
+                ]
+            }
+        }
+    },
+    "rewards": {
+        "function": "nations:farmer/composter_place"
+    }
+}
