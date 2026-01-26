@@ -1,23 +1,17 @@
 {
     "criteria": {
-        "use_axe": {
+        "use_horn": {
             "trigger": "minecraft:using_item",
             "conditions": {
                 "item": {
-                    "items": [
-                        "minecraft:wooden_axe",
-                        "minecraft:stone_axe",
-                        "minecraft:iron_axe",
-                        "minecraft:golden_axe",
-                        "minecraft:diamond_axe",
-                        "minecraft:netherite_axe"
-                    ]
+                    "items": "#minecraft:goat_horns"
                 },
                 "player": [
                     {
                         "condition": "minecraft:entity_properties",
                         "entity": "this",
                         "predicate": {
+                            "type": "minecraft:player",
                             "nbt": "{Tags:[\"role_warrior\"]}"
                         }
                     }

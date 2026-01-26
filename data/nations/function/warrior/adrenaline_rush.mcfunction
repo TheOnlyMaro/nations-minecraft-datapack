@@ -1,6 +1,10 @@
 # nations:warrior/adrenaline_rush
 # Grants Speed II for 5s (100 ticks) if Health <= 5.0 (2.5 Hearts)
 # Cooldown: 3s (60 ticks)
+# Triggered by: advancement nations:warrior/took_damage
+
+# 0. Revoke advancement so it can trigger again
+advancement revoke @s only nations:warrior/took_damage
 
 # 1. Check Cooldown
 execute if score @s nations_cd_adrenaline matches 1.. run return 0
