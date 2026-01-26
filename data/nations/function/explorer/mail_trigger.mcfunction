@@ -1,0 +1,29 @@
+# nations:explorer/mail_trigger
+# Display list of online players to send item to
+
+# Check: Holding an item in main hand
+execute unless data entity @s SelectedItem run tellraw @s {"text":"Hold an item in your main hand to send!","color":"red"}
+execute unless data entity @s SelectedItem run return fail
+
+# Check: Has 5+ XP levels
+execute unless entity @s[level=5..] run tellraw @s {"text":"You need 5 XP levels to send mail!","color":"red"}
+execute unless entity @s[level=5..] run return fail
+
+# Display Header
+tellraw @s [{"text":"━━━━━━━━━━━━ ","color":"dark_aqua","bold":true},{"text":"SEND MAIL","color":"aqua","bold":true},{"text":" ━━━━━━━━━━━━","color":"dark_aqua","bold":true}]
+tellraw @s {"text":"Click a player to send your held item:","color":"gray","italic":true}
+tellraw @s {"text":""}
+
+# Store sender for targeting
+tag @s add nations_mail_sender
+
+# List all online players - execute as each player, store their info, call macro
+execute as @a run function nations:explorer/mail_list_player
+
+# Remove sender tag
+tag @s remove nations_mail_sender
+
+# Footer
+tellraw @s {"text":""}
+tellraw @s [{"text":"Cost: ","color":"gray"},{"text":"5 XP Levels","color":"gold"}]
+tellraw @s {"text":"━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━","color":"dark_aqua","bold":true}
