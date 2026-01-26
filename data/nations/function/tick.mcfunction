@@ -4,7 +4,6 @@
 # Warrior
 scoreboard players remove @a[scores={nations_cd_adrenaline=1..}] nations_cd_adrenaline 1
 # Farmer
-scoreboard players remove @a[scores={nations_cd_breeding=1..}] nations_cd_breeding 1
 scoreboard players remove @a[scores={nations_cd_vengeance=1..}] nations_cd_vengeance 1
 
 # Global Cooldowns
