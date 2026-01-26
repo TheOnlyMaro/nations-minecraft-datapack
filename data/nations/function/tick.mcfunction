@@ -1,7 +1,7 @@
 # nations:tick — run each tick
 
 # Role Handlers
-execute as @a[predicate=nations:is_warrior] run function nations:warrior/thou_shalt_bleed
+function nations:warrior/thou_shalt_bleed
 execute as @a run function nations:warrior/vanguard
 execute as @a[predicate=nations:is_warrior] run function nations:warrior/adrenaline_rush
 

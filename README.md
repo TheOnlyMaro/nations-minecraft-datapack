@@ -176,8 +176,8 @@ All roles are assigned via player NBT tags, persisted for the lifetime of the pl
 - **Custom Recipes:** Cheaper XP bottles and Nether Wart crafting.
   * **XP Bottle Recipe:** 1 Glass Bottle + 1 Lapis Lazuli + 7 Gold Nuggets → 1 Experience Bottle.
   * **Nether Wart Recipe:** 1 Nether Wart Seed + 1 Redstone Dust + 1 Gold Nugget → 1 Nether Wart.
-  * **Implementation:** Custom shaped recipes in `recipes/` folder.
-  * **Availability:** All players can use (not role-restricted), but designed as Enchanter benefit.
+  * **Implementation:** Custom shaped recipes in `recipe/` folder.
+  * **Availability:** ONLY Enchanters can use these custom recipes (role-restricted).
 
 - **Blood Sacrifice:** Kill a pig named "Vessel" for permanent +2 Hearts (until death).
   * **Trigger:** `EntityDeath` event for pig named "Vessel" killed by Enchanter.
@@ -195,18 +195,31 @@ All roles are assigned via player NBT tags, persisted for the lifetime of the pl
   * **Cooldown:** 10 ticks (0.5s) between uses.
   * **Detection:** Checks durability of main-hand item; applies repair NBT.
 
-- **Summoner:** Capture a hostile mob (Non-Boss) onto paper.
-  * **Trigger:** Hold paper + right-click hostile mob (non-boss: no Wither, Ender Dragon, etc.).
-  * **Mechanism:** Captures mob as NBT data on paper item (`CustomName`, `Pose`, `Rotation`, etc.); original mob despawns.
-  * **Cooldown:** 30 ticks per capture.
-  * **Limitation:** Summoned mob dies automatically after 2 minutes (120 ticks) via `PersistenceRequired: 0b` and timed despawn.
-  * **Audio:** `entity.endermen.teleport` sound.
-  * **Usage:** Right-click with captured paper to summon mob (once per paper).
+- **Summoner:** Capture a hostile mob (Non-Boss) onto a book via ritual.
+  * **Capture Requirements:**
+    - **Trap:** Mob must be confined in a 2×1 area (2 blocks tall, 1×1 wide—e.g., trapdoor ceiling or fence enclosure).
+    - **Ritual:** Perform the following steps:
+      1. Place a Lectern directly above the trapped mob (on the ceiling block).
+      2. Insert a Book and Quill into the Lectern.
+      3. The ritual activates automatically when the Lectern detects a valid trapped mob below.
+    - **Mechanism:** Upon successful ritual completion, the mob's NBT data (`CustomName`, `Health`, `Attributes`, etc.) is transferred onto the Book and Quill in the Lectern. The original mob is killed (not despawned) to prevent duplication.
+    - **Audio (Capture):** `entity.endermen.teleport` + `block.enchantment_table.use` sounds with purple particle effects.
+  * **Summoning Mechanics:**
+    - **Trigger:** Right-click with captured paper/book on a valid spawn surface (solid block).
+    - **Role Requirement:** Does NOT require Enchanter role—summons can be traded to any player.
+    - **Summoning Process:**
+      1. **Delay:** 3-second channeling period (60 ticks). Player must stand still; moving cancels summoning.
+      2. **Visual Effects:** Purple spiral particles (`minecraft:portal`) around spawn location, increasing in intensity.
+      3. **Audio Effects:** Gradual buildup sound (`block.beacon.ambient` pitch increasing), culminating in `entity.wither.spawn` on completion.
+      4. **Spawn:** Mob appears at target location; captured paper/book is consumed.
+    - **Limitation:** Summoned mob dies automatically after 2 minutes (2400 ticks) via `PersistenceRequired: 0b` and timed despawn tag.
+    - **Cooldown (Capture):** 600 ticks (30s) per capture attempt.
+    - **Cooldown (Summon):** 200 ticks (10s) per summon.
 
-- **Sky Mage (MODIFIED):** Right-clicking a Feather grants **Levitation II for 3s**. Feather is consumed.
+- **Sky Mage (MODIFIED):** Right-clicking a Feather grants **Levitation II for 10s**. Feather is consumed.
   * **Trigger:** Right-click with feather in hand (any slot).
-  * **Mechanism:** Removes feather from inventory; applies `minecraft:levitation` (2 levels) for 60 ticks (3s).
-  * **Cooldown:** 15 ticks (0.75s).
+  * **Mechanism:** Removes feather from inventory; applies `minecraft:levitation` (2 levels) for 200 ticks (10s).
+  * **Cooldown:** 2400 ticks (120s).
   * **Audio:** `item.firecharge.use` sound.
   * **Effect:** Levitation II pushes player upward; can be canceled by jumping.
 
@@ -300,12 +313,16 @@ All roles are assigned via player NBT tags, persisted for the lifetime of the pl
 
 **Approved Abilities:**
 
-- **Thou Shalt Bleed:** Shield block grants temporary Sharpness I.
-  * **Trigger:** `PlayerBlockBreak` or `ProjectileHit` predicate on shield + `role_warrior` tag.
-  * **Mechanism:** While blocking (shield raised), applies `minecraft:sharpness` (1 level) to main-hand sword if no sharpness present.
-  * **Detection:** Ticking function checks shield NBT (`Blocking: 1b`) and re-applies sharpness if removed.
-  * **Removal:** Sharpness removed when shield is dropped or blocking stops.
-  * **Audio:** `block.grindstone.use` sound with item shield block effect.
+- **Thou Shalt Bleed:** Right-clicking with shield while holding a sword grants it Sharpness II.
+  * **Trigger:** Right-click with shield (advancement-based, no tick overhead for activation).
+  * **Mechanism:** Adds `nations_blessed_blade` NBT tag and Sharpness II enchantment to mainhand sword.
+  * **Duration:** Permanent until removal conditions met.
+  * **Removal Conditions:**
+    - Sword is unequipped from mainhand slot
+    - Sword is held by a non-warrior player
+  * **Detection:** Tick function checks all players with blessed blades for removal conditions.
+  * **Audio:** `block.grindstone.use` sound on activation with enchant particles.
+  * **Damage Bonus:** Sharpness II adds +2.5 damage per hit.
 
 - **Vanguard:** Base Health = 24 (12 Hearts).
   * **Mechanism:** Sets `generic.max_health` to 24 on first tag assignment (`role_warrior` added).

@@ -1,0 +1,17 @@
+[
+    {
+        "function": "minecraft:set_components",
+        "components": {
+            "minecraft:custom_data": {
+                "nations_blessed_blade": 1
+            }
+        }
+    },
+    {
+        "function": "minecraft:set_enchantments",
+        "enchantments": {
+            "minecraft:sharpness": 2
+        },
+        "add": true
+    }
+]
