@@ -2,9 +2,6 @@
 # The actual effect logic for Nature's Vengeance.
 # Triggered by nations:farmer/natures_vengeance
 
-# DEBUG
-tellraw @s [{"text":"[DEBUG] Casting Nature's Vengeance","color":"aqua"}]
-
 # 1. Set Cooldown to 400 ticks (20 seconds)
 scoreboard players set @s nations_cd_vengeance 400
 

@@ -7,7 +7,13 @@
 advancement revoke @s only nations:warrior/use_goat_horn
 
 # 2. Check Global Cooldown
-execute if score #GLOBAL nations_global_warcry_cd matches 1.. run tellraw @s {"text":"War Cry is on cooldown!","color":"red"}
+# Calculate seconds remaining
+execute if score #GLOBAL nations_global_warcry_cd matches 1.. run scoreboard players operation #TEMP nations_global_warcry_cd = #GLOBAL nations_global_warcry_cd
+execute if score #GLOBAL nations_global_warcry_cd matches 1.. run scoreboard players set #CONST_20 nations_global_warcry_cd 20
+execute if score #GLOBAL nations_global_warcry_cd matches 1.. run scoreboard players operation #TEMP nations_global_warcry_cd /= #CONST_20 nations_global_warcry_cd
+
+# Check and message
+execute if score #GLOBAL nations_global_warcry_cd matches 1.. run tellraw @s [{"text":"War Cry is on cooldown! ","color":"red"},{"score":{"name":"#TEMP","objective":"nations_global_warcry_cd"},"color":"gold"},{"text":"s remaining","color":"red"}]
 execute if score #GLOBAL nations_global_warcry_cd matches 1.. run return 0
 
 # 3. Apply Cooldown
