@@ -2,13 +2,9 @@
     {
         "function": "minecraft:set_components",
         "components": {
-            "minecraft:enchantments": {}
-        }
-    },
-    {
-        "function": "minecraft:set_components",
-        "components": {
-            "minecraft:custom_data": {}
+            "minecraft:custom_data": {},
+            "minecraft:attribute_modifiers": [],
+            "minecraft:enchantment_glint_override": false
         }
     }
 ]
