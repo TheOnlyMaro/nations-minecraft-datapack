@@ -33,6 +33,12 @@ scoreboard players remove @a[scores={nations_cooldown_waypoint=1..}] nations_coo
 scoreboard players remove @a[scores={nations_cooldown_sethome=1..}] nations_cooldown_sethome 1
 scoreboard players remove @a[scores={nations_warmup=1..}] nations_warmup 1
 scoreboard players remove @a[scores={nations_combat_timer=1..}] nations_combat_timer 1
+scoreboard players remove @a[scores={nations_dowsing_cooldown=1..}] nations_dowsing_cooldown 1
+
+# Explorer Dowsing Trigger
+scoreboard players enable @a[predicate=nations:is_explorer] nations_dowsing
+execute as @a[predicate=nations:is_explorer,scores={nations_dowsing=1..}] at @s run function nations:explorer/dowsing_activate
+scoreboard players reset @a[scores={nations_dowsing=1..}] nations_dowsing
 
 # Combat Detection (Reset Timer on Damage)
 execute as @a[scores={nations_took_damage=1..}] run scoreboard players set @s nations_combat_timer 200

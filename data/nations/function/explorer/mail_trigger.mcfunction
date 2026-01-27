@@ -11,17 +11,11 @@ execute unless entity @s[level=5..] run return fail
 
 # Display Header
 tellraw @s [{"text":"━━━━━━━━━━━━ ","color":"dark_aqua","bold":true},{"text":"SEND MAIL","color":"aqua","bold":true},{"text":" ━━━━━━━━━━━━","color":"dark_aqua","bold":true}]
-tellraw @s {"text":"Click a player to send your held item:","color":"gray","italic":true}
+tellraw @s {"text":"Type: /trigger nations_mail_id set <number>","color":"gray","italic":true}
 tellraw @s {"text":""}
 
-# Store sender for targeting
-tag @s add nations_mail_sender
-
-# List all online players - execute as each player, store their info, call macro
-execute as @a run function nations:explorer/mail_list_player
-
-# Remove sender tag
-tag @s remove nations_mail_sender
+# List all online players with their IDs
+execute as @a run tellraw @a[predicate=nations:is_explorer,scores={nations_mail_trigger=1..},limit=1] [{"text":"  ","color":"gray"},{"score":{"name":"@s","objective":"nations_pid"},"color":"gold","bold":true},{"text":" - ","color":"gray"},{"selector":"@s","color":"yellow"}]
 
 # Footer
 tellraw @s {"text":""}

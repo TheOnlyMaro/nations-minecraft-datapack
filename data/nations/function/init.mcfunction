@@ -15,3 +15,5 @@ scoreboard objectives add nations_took_damage minecraft.custom:minecraft.damage_
 scoreboard objectives add nations_pid dummy
 scoreboard objectives add nations_mail_id trigger
 scoreboard objectives add nations_mail_trigger trigger
+scoreboard objectives add nations_dowsing_cooldown dummy
+scoreboard objectives add nations_dowsing trigger
