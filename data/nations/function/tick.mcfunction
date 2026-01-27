@@ -13,6 +13,14 @@ scoreboard players remove #GLOBAL nations_global_warcry_cd 1
 execute as @a[tag=role_farmer] run function nations:farmer/photosynthesis
 execute as @a[tag=role_farmer] run function nations:farmer/convert_held_beetroots
 
+# Enchanter Branch Tick Loop
+execute as @a[tag=role_enchanter] run function nations:enchanter/alchemist
+function nations:nerf/clear_restricted_items
+
+
 
 # Persistent Roles / Markers
+# Persistent Roles / Markers
 execute as @e[type=marker,tag=nations_composter_marker] at @s run function nations:farmer/composter_tick
+function nations:enchanter/summon_tick
+
