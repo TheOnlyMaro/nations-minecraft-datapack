@@ -151,30 +151,6 @@
                 },
                 {
                     "condition": "minecraft:entity_properties",
-                    "entity": "this",
-                    "predicate": {
-                        "flags": {
-                            "is_baby": true
-                        },
-                        "vehicle": {
-                            "type": "minecraft:chicken"
-                        }
-                    }
-                }
-            ],
-            "entries": [
-                {
-                    "type": "minecraft:item",
-                    "name": "minecraft:music_disc_lava_chicken"
-                }
-            ],
-            "rolls": 1.0
-        },
-        {
-            "bonus_rolls": 0.0,
-            "conditions": [
-                {
-                    "condition": "minecraft:entity_properties",
                     "entity": "attacking_player",
                     "predicate": {
                         "nbt": "{Tags:[\"role_warrior\"]}"
@@ -345,44 +321,6 @@
                         }
                     ],
                     "name": "minecraft:potato"
-                }
-            ],
-            "rolls": 1.0
-        },
-        {
-            "bonus_rolls": 0.0,
-            "conditions": [
-                {
-                    "condition": "minecraft:killed_by_player"
-                },
-                {
-                    "condition": "minecraft:entity_properties",
-                    "entity": "this",
-                    "predicate": {
-                        "flags": {
-                            "is_baby": true
-                        },
-                        "vehicle": {
-                            "type": "minecraft:chicken"
-                        }
-                    }
-                },
-                {
-                    "condition": "minecraft:entity_properties",
-                    "entity": "attacking_player",
-                    "predicate": {
-                        "nbt": "{Tags:[\"role_warrior\"]}"
-                    }
-                },
-                {
-                    "condition": "minecraft:random_chance",
-                    "chance": 0.5
-                }
-            ],
-            "entries": [
-                {
-                    "type": "minecraft:item",
-                    "name": "minecraft:music_disc_lava_chicken"
                 }
             ],
             "rolls": 1.0
