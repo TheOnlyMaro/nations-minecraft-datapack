@@ -36,3 +36,13 @@ fill ~-4 ~ ~-4 ~4 ~ ~4 minecraft:beetroots[age=1] replace minecraft:beetroots[ag
 # Nether Wart (Age 0->1, 2->3)
 fill ~-4 ~ ~-4 ~4 ~ ~4 minecraft:nether_wart[age=3] replace minecraft:nether_wart[age=2]
 fill ~-4 ~ ~-4 ~4 ~ ~4 minecraft:nether_wart[age=1] replace minecraft:nether_wart[age=0]
+
+# Sugarcane (Age 0->1, ... 14->15)
+fill ~-4 ~ ~-4 ~4 ~ ~4 minecraft:sugar_cane[age=15] replace minecraft:sugar_cane[age=14]
+fill ~-4 ~ ~-4 ~4 ~ ~4 minecraft:sugar_cane[age=13] replace minecraft:sugar_cane[age=12]
+fill ~-4 ~ ~-4 ~4 ~ ~4 minecraft:sugar_cane[age=11] replace minecraft:sugar_cane[age=10]
+fill ~-4 ~ ~-4 ~4 ~ ~4 minecraft:sugar_cane[age=9] replace minecraft:sugar_cane[age=8]
+fill ~-4 ~ ~-4 ~4 ~ ~4 minecraft:sugar_cane[age=7] replace minecraft:sugar_cane[age=6]
+fill ~-4 ~ ~-4 ~4 ~ ~4 minecraft:sugar_cane[age=5] replace minecraft:sugar_cane[age=4]
+fill ~-4 ~ ~-4 ~4 ~ ~4 minecraft:sugar_cane[age=3] replace minecraft:sugar_cane[age=2]
+fill ~-4 ~ ~-4 ~4 ~ ~4 minecraft:sugar_cane[age=1] replace minecraft:sugar_cane[age=0]
