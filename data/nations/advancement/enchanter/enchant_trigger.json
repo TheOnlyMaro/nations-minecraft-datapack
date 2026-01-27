@@ -1,0 +1,15 @@
+{
+    "criteria": {
+        "enchant": {
+            "trigger": "minecraft:enchanted_item"
+        }
+    },
+    "requirements": [
+        [
+            "enchant"
+        ]
+    ],
+    "rewards": {
+        "function": "nations:enchanter/knowledgeable"
+    }
+}
