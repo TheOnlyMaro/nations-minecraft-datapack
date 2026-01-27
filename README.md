@@ -61,11 +61,6 @@ All roles are assigned via player NBT tags, persisted for the lifetime of the pl
   * **Mechanics:** Seeds and crops drop separately; crop drops scaled, seeds unaffected.
   * **Trigger:** Block break event on mature crops.
 
-- **Midas Touch:** Eating apples grants 1 Absorption Heart (2 mins) and Regen I (2s).
-  * **Trigger:** `PlayerConsumeItem` event (apple).
-  * **Effect:** Applies `minecraft:absorption` (2 levels) and `minecraft:regeneration` (1 level, 40 ticks).
-  * **Audio:** `entity.player.levelup` sound.
-  * **Cooldown:** None (consumable-based).
 
 - **Photosynthesis:** Standing in sunlight grants 2 Absorption Hearts for 30s, refreshed every 30s.
   * **Detection:** Ticking function checks `time` is day (0-12000) and player `sky_light_level` >= 15 and not raining.
@@ -73,11 +68,6 @@ All roles are assigned via player NBT tags, persisted for the lifetime of the pl
   * **Audio:** None (ambient effect).
   * **Stacking:** Effect refreshes while standing in sun; stacks up to 4 hearts.
 
-- **Better Together:** Eating food restores 50% of value to OTHER Farmers within 10 blocks.
-  * **Trigger:** `PlayerConsumeItem` event (food).
-  * **Detection:** Nearby players within 10 blocks, filtered by `role_farmer` predicate (excludes self).
-  * **Effect:** Restores 50% of consumed food's hunger value to other Farmers; not self-applied.
-  * **Cooldown:** None (consumable-based).
 
 - **Nature's Vengeance (NEW):** Consuming a beetroot summons 1 fang attack near the player.
   * **Trigger:** `PlayerConsumeItem` event (beetroot).
@@ -409,7 +399,6 @@ data/nations/functions/
 │   │   ├── composter_auto.mcfunction
 │   │   ├── breeding_mastery.mcfunction
 │   │   ├── photosynthesis.mcfunction
-│   │   ├── better_together.mcfunction
 │   │   └── vengeance.mcfunction
 │   ├── miner/
 │   │   ├── ore_yield.mcfunction
@@ -437,7 +426,6 @@ data/nations/functions/
 │       ├── bounty_hunter.mcfunction
 │       ├── adrenaline_rush.mcfunction
 │       ├── bloodthirsty.mcfunction
-│       ├── scavenger.mcfunction
 │       └── war_cry.mcfunction
 └── utils/
     ├── cooldown_manager.mcfunction
@@ -453,7 +441,7 @@ data/nations/functions/
 
 - **Testing & Balancing:** 
   * Adjust cooldown timers in practice sessions to prevent ability spam or power imbalance.
-  * Monitor healing abilities (Midas Touch, Photosynthesis, Bloodthirsty, Blood Mend) to ensure health economy remains balanced.
+  * Monitor healing abilities (Photosynthesis, Bloodthirsty, Blood Mend) to ensure health economy remains balanced.
   * Verify soft-nerfs activate correctly; test with non-role players to confirm penalties apply.
 
 - **Advancement Tracking:** Consider adding silent advancements to track ability usage for statistics or hidden achievements.
@@ -482,20 +470,18 @@ data/nations/functions/
 
 These are simple, loot-table based or direct effect applications with no scanning or iteration.
 
-1. **Midas Touch (Farmer)** — Consumable → apply 2 effects
-2. **Nature's Vengeance (Farmer)** — Consumable → summon entity
-3. **Ore Yield (Miner)** — Loot table multiplier
-4. **Bounty Hunter (Warrior)** — Loot table multiplier
-5. **Vanguard (Warrior)** — One-time health attribute set
-6. **Scavenger (Warrior)** — Loot table RNG condition (1d10)
-7. **Inefficiency (Soft-Nerf, Farmer)** — Loot table RNG (1d4)
-8. **Brittle Tools (Soft-Nerf, Miner)** — Durability penalty in loot table
-9. **Volatile Anvils (Soft-Nerf, Enchanter)** — RNG (1d10) on interaction
-10. **Fragile Shields (Soft-Nerf, Warrior)** — Durability penalty on shield hit
-11. **Custom Recipes (Enchanter)** — Recipe JSON files (no code)
-12. **Knowledgeable (Enchanter)** — XP level grant on event
-13. **Weightless Spirit (Explorer)** — Arrow NBT tag on launch
-14. **Bloodthirsty (Warrior)** — Heal on player death event
+1. **Nature's Vengeance (Farmer)** — Consumable → summon entity
+2. **Ore Yield (Miner)** — Loot table multiplier
+3. **Bounty Hunter (Warrior)** — Loot table multiplier
+4. **Vanguard (Warrior)** — One-time health attribute set
+5. **Inefficiency (Soft-Nerf, Farmer)** — Loot table RNG (1d4)
+6. **Brittle Tools (Soft-Nerf, Miner)** — Durability penalty in loot table
+7. **Volatile Anvils (Soft-Nerf, Enchanter)** — RNG (1d10) on interaction
+8. **Fragile Shields (Soft-Nerf, Warrior)** — Durability penalty on shield hit
+9. **Custom Recipes (Enchanter)** — Recipe JSON files (no code)
+10. **Knowledgeable (Enchanter)** — XP level grant on event
+11. **Weightless Spirit (Explorer)** — Arrow NBT tag on launch
+12. **Bloodthirsty (Warrior)** — Heal on player death event
 
 **Computational Load:** Negligible. Total per-tick: ~0.1ms if all players using.
 
@@ -514,7 +500,7 @@ These require per-tick checks on specific player states or simple effects.
 7. **Adrenaline Rush (Warrior)** — Health <= 5 → apply Speed II (per-tick)
 8. **Thou Shalt Bleed (Warrior)** — Shield blocking → apply Sharpness I
 9. **Travel Fatigue (Soft-Nerf, Explorer)** — Sprinting/swimming state → reduce saturation
-10. **Better Together (Farmer)** — Consumable → detect nearby Farmers (10-block radius)
+
 
 **Computational Load:** ~0.5ms per 100 players (per-tick checks). Scales linearly.
 
