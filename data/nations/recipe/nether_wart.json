@@ -1,0 +1,17 @@
+{
+    "type": "minecraft:crafting_shapeless",
+    "ingredients": [
+        "minecraft:nether_wart",
+        "minecraft:redstone",
+        "minecraft:gold_nugget"
+    ],
+    "result": {
+        "id": "minecraft:nether_wart",
+        "count": 1,
+        "components": {
+            "minecraft:custom_data": {
+                "enchanter_restricted": 1
+            }
+        }
+    }
+}
