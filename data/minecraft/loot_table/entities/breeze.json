@@ -3,6 +3,11 @@
     "pools": [
         {
             "bonus_rolls": 0.0,
+            "conditions": [
+                {
+                    "condition": "minecraft:killed_by_player"
+                }
+            ],
             "entries": [
                 {
                     "type": "minecraft:item",
@@ -12,21 +17,21 @@
                             "count": {
                                 "type": "minecraft:uniform",
                                 "max": 2.0,
-                                "min": 0.0
+                                "min": 1.0
                             },
                             "function": "minecraft:set_count"
                         },
                         {
                             "count": {
                                 "type": "minecraft:uniform",
-                                "max": 1.0,
-                                "min": 0.0
+                                "max": 2.0,
+                                "min": 1.0
                             },
                             "enchantment": "minecraft:looting",
                             "function": "minecraft:enchanted_count_increase"
                         }
                     ],
-                    "name": "minecraft:gunpowder"
+                    "name": "minecraft:breeze_rod"
                 }
             ],
             "rolls": 1.0
@@ -35,25 +40,8 @@
             "bonus_rolls": 0.0,
             "conditions": [
                 {
-                    "condition": "minecraft:entity_properties",
-                    "entity": "attacker",
-                    "predicate": {
-                        "type": "#minecraft:skeletons"
-                    }
-                }
-            ],
-            "entries": [
-                {
-                    "type": "minecraft:tag",
-                    "expand": true,
-                    "name": "minecraft:creeper_drop_music_discs"
-                }
-            ],
-            "rolls": 1.0
-        },
-        {
-            "bonus_rolls": 0.0,
-            "conditions": [
+                    "condition": "minecraft:killed_by_player"
+                },
                 {
                     "condition": "minecraft:entity_properties",
                     "entity": "attacking_player",
@@ -75,56 +63,25 @@
                             "count": {
                                 "type": "minecraft:uniform",
                                 "max": 2.0,
-                                "min": 0.0
+                                "min": 1.0
                             },
                             "function": "minecraft:set_count"
                         },
                         {
                             "count": {
                                 "type": "minecraft:uniform",
-                                "max": 1.0,
-                                "min": 0.0
+                                "max": 2.0,
+                                "min": 1.0
                             },
                             "enchantment": "minecraft:looting",
                             "function": "minecraft:enchanted_count_increase"
                         }
                     ],
-                    "name": "minecraft:gunpowder"
-                }
-            ],
-            "rolls": 1.0
-        },
-        {
-            "bonus_rolls": 0.0,
-            "conditions": [
-                {
-                    "condition": "minecraft:entity_properties",
-                    "entity": "attacker",
-                    "predicate": {
-                        "type": "#minecraft:skeletons"
-                    }
-                },
-                {
-                    "condition": "minecraft:entity_properties",
-                    "entity": "attacking_player",
-                    "predicate": {
-                        "nbt": "{Tags:[\"role_warrior\"]}"
-                    }
-                },
-                {
-                    "condition": "minecraft:random_chance",
-                    "chance": 0.5
-                }
-            ],
-            "entries": [
-                {
-                    "type": "minecraft:tag",
-                    "expand": true,
-                    "name": "minecraft:creeper_drop_music_discs"
+                    "name": "minecraft:breeze_rod"
                 }
             ],
             "rolls": 1.0
         }
     ],
-    "random_sequence": "minecraft:entities/creeper"
+    "random_sequence": "minecraft:entities/breeze"
 }
