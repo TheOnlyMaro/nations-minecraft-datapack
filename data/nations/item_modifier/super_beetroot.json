@@ -1,0 +1,21 @@
+{
+    "function": "minecraft:set_components",
+    "components": {
+        "minecraft:food": {
+            "nutrition": 1,
+            "saturation": 1.2,
+            "can_always_eat": true
+        },
+        "minecraft:consumable": {
+            "consume_seconds": 0.6
+        },
+        "minecraft:custom_data": "{nations_modified:1b}",
+        "minecraft:lore": [
+            {
+                "text": "Deliciously fast!",
+                "color": "gray",
+                "italic": true
+            }
+        ]
+    }
+}

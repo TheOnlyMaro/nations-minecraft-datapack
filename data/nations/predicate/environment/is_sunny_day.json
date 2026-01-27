@@ -10,14 +10,14 @@
         },
         {
             "condition": "minecraft:weather_check",
-            "raining": false,
             "thundering": false
         },
         {
-            "condition": "minecraft:location_check",
+            "condition": "minecraft:entity_properties",
+            "entity": "this",
             "predicate": {
-                "light": {
-                    "light": 15
+                "location": {
+                    "can_see_sky": true
                 }
             }
         }

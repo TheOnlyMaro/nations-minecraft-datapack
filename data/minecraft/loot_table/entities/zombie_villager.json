@@ -33,47 +33,6 @@
         },
         {
             "bonus_rolls": 0.0,
-            "entries": [
-                {
-                    "type": "minecraft:item",
-                    "conditions": [
-                        {
-                            "condition": "minecraft:entity_properties",
-                            "entity": "this",
-                            "predicate": {
-                                "vehicle": {
-                                    "type": "minecraft:zombie_horse"
-                                }
-                            }
-                        }
-                    ],
-                    "functions": [
-                        {
-                            "add": false,
-                            "count": {
-                                "type": "minecraft:uniform",
-                                "max": 1.0,
-                                "min": 0.0
-                            },
-                            "function": "minecraft:set_count"
-                        },
-                        {
-                            "count": {
-                                "type": "minecraft:uniform",
-                                "max": 1.0,
-                                "min": 0.0
-                            },
-                            "enchantment": "minecraft:looting",
-                            "function": "minecraft:enchanted_count_increase"
-                        }
-                    ],
-                    "name": "minecraft:red_mushroom"
-                }
-            ],
-            "rolls": 1.0
-        },
-        {
-            "bonus_rolls": 0.0,
             "conditions": [
                 {
                     "condition": "minecraft:killed_by_player"
@@ -147,33 +106,6 @@
             "bonus_rolls": 0.0,
             "conditions": [
                 {
-                    "condition": "minecraft:killed_by_player"
-                },
-                {
-                    "condition": "minecraft:entity_properties",
-                    "entity": "this",
-                    "predicate": {
-                        "flags": {
-                            "is_baby": true
-                        },
-                        "vehicle": {
-                            "type": "minecraft:chicken"
-                        }
-                    }
-                }
-            ],
-            "entries": [
-                {
-                    "type": "minecraft:item",
-                    "name": "minecraft:music_disc_lava_chicken"
-                }
-            ],
-            "rolls": 1.0
-        },
-        {
-            "bonus_rolls": 0.0,
-            "conditions": [
-                {
                     "condition": "minecraft:entity_properties",
                     "entity": "attacking_player",
                     "predicate": {
@@ -209,60 +141,6 @@
                         }
                     ],
                     "name": "minecraft:rotten_flesh"
-                }
-            ],
-            "rolls": 1.0
-        },
-        {
-            "bonus_rolls": 0.0,
-            "conditions": [
-                {
-                    "condition": "minecraft:entity_properties",
-                    "entity": "attacking_player",
-                    "predicate": {
-                        "nbt": "{Tags:[\"role_warrior\"]}"
-                    }
-                },
-                {
-                    "condition": "minecraft:random_chance",
-                    "chance": 0.5
-                }
-            ],
-            "entries": [
-                {
-                    "type": "minecraft:item",
-                    "conditions": [
-                        {
-                            "condition": "minecraft:entity_properties",
-                            "entity": "this",
-                            "predicate": {
-                                "vehicle": {
-                                    "type": "minecraft:zombie_horse"
-                                }
-                            }
-                        }
-                    ],
-                    "functions": [
-                        {
-                            "add": false,
-                            "count": {
-                                "type": "minecraft:uniform",
-                                "max": 1.0,
-                                "min": 0.0
-                            },
-                            "function": "minecraft:set_count"
-                        },
-                        {
-                            "count": {
-                                "type": "minecraft:uniform",
-                                "max": 1.0,
-                                "min": 0.0
-                            },
-                            "enchantment": "minecraft:looting",
-                            "function": "minecraft:enchanted_count_increase"
-                        }
-                    ],
-                    "name": "minecraft:red_mushroom"
                 }
             ],
             "rolls": 1.0
@@ -350,5 +228,5 @@
             "rolls": 1.0
         }
     ],
-    "random_sequence": "minecraft:entities/zombie"
+    "random_sequence": "minecraft:entities/zombie_villager"
 }

@@ -11,7 +11,7 @@
                             "add": false,
                             "count": {
                                 "type": "minecraft:uniform",
-                                "max": 2.0,
+                                "max": 1.0,
                                 "min": 0.0
                             },
                             "function": "minecraft:set_count"
@@ -26,7 +26,7 @@
                             "function": "minecraft:enchanted_count_increase"
                         }
                     ],
-                    "name": "minecraft:arrow"
+                    "name": "minecraft:ghast_tear"
                 }
             ],
             "rolls": 1.0
@@ -56,7 +56,86 @@
                             "function": "minecraft:enchanted_count_increase"
                         }
                     ],
-                    "name": "minecraft:bone"
+                    "name": "minecraft:gunpowder"
+                }
+            ],
+            "rolls": 1.0
+        },
+        {
+            "bonus_rolls": 0.0,
+            "conditions": [
+                {
+                    "condition": "minecraft:damage_source_properties",
+                    "predicate": {
+                        "direct_entity": {
+                            "type": "minecraft:fireball"
+                        },
+                        "tags": [
+                            {
+                                "expected": true,
+                                "id": "minecraft:is_projectile"
+                            }
+                        ]
+                    }
+                },
+                {
+                    "condition": "minecraft:killed_by_player"
+                }
+            ],
+            "entries": [
+                {
+                    "type": "minecraft:item",
+                    "name": "minecraft:music_disc_tears"
+                }
+            ],
+            "functions": [
+                {
+                    "add": false,
+                    "count": 1.0,
+                    "function": "minecraft:set_count"
+                }
+            ],
+            "rolls": 1.0
+        },
+        {
+            "bonus_rolls": 0.0,
+            "conditions": [
+                {
+                    "condition": "minecraft:entity_properties",
+                    "entity": "attacking_player",
+                    "predicate": {
+                        "nbt": "{Tags:[\"role_warrior\"]}"
+                    }
+                },
+                {
+                    "condition": "minecraft:random_chance",
+                    "chance": 0.5
+                }
+            ],
+            "entries": [
+                {
+                    "type": "minecraft:item",
+                    "functions": [
+                        {
+                            "add": false,
+                            "count": {
+                                "type": "minecraft:uniform",
+                                "max": 1.0,
+                                "min": 0.0
+                            },
+                            "function": "minecraft:set_count"
+                        },
+                        {
+                            "count": {
+                                "type": "minecraft:uniform",
+                                "max": 1.0,
+                                "min": 0.0
+                            },
+                            "enchantment": "minecraft:looting",
+                            "function": "minecraft:enchanted_count_increase"
+                        }
+                    ],
+                    "name": "minecraft:ghast_tear"
                 }
             ],
             "rolls": 1.0
@@ -99,7 +178,7 @@
                             "function": "minecraft:enchanted_count_increase"
                         }
                     ],
-                    "name": "minecraft:arrow"
+                    "name": "minecraft:gunpowder"
                 }
             ],
             "rolls": 1.0
@@ -107,6 +186,23 @@
         {
             "bonus_rolls": 0.0,
             "conditions": [
+                {
+                    "condition": "minecraft:damage_source_properties",
+                    "predicate": {
+                        "direct_entity": {
+                            "type": "minecraft:fireball"
+                        },
+                        "tags": [
+                            {
+                                "expected": true,
+                                "id": "minecraft:is_projectile"
+                            }
+                        ]
+                    }
+                },
+                {
+                    "condition": "minecraft:killed_by_player"
+                },
                 {
                     "condition": "minecraft:entity_properties",
                     "entity": "attacking_player",
@@ -122,31 +218,18 @@
             "entries": [
                 {
                     "type": "minecraft:item",
-                    "functions": [
-                        {
-                            "add": false,
-                            "count": {
-                                "type": "minecraft:uniform",
-                                "max": 2.0,
-                                "min": 0.0
-                            },
-                            "function": "minecraft:set_count"
-                        },
-                        {
-                            "count": {
-                                "type": "minecraft:uniform",
-                                "max": 1.0,
-                                "min": 0.0
-                            },
-                            "enchantment": "minecraft:looting",
-                            "function": "minecraft:enchanted_count_increase"
-                        }
-                    ],
-                    "name": "minecraft:bone"
+                    "name": "minecraft:music_disc_tears"
+                }
+            ],
+            "functions": [
+                {
+                    "add": false,
+                    "count": 1.0,
+                    "function": "minecraft:set_count"
                 }
             ],
             "rolls": 1.0
         }
     ],
-    "random_sequence": "minecraft:entities/skeleton"
+    "random_sequence": "minecraft:entities/ghast"
 }

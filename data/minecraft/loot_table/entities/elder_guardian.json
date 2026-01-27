@@ -26,7 +26,7 @@
                             "function": "minecraft:enchanted_count_increase"
                         }
                     ],
-                    "name": "minecraft:rotten_flesh"
+                    "name": "minecraft:prismarine_shard"
                 }
             ],
             "rolls": 1.0
@@ -36,27 +36,59 @@
             "entries": [
                 {
                     "type": "minecraft:item",
-                    "conditions": [
-                        {
-                            "condition": "minecraft:entity_properties",
-                            "entity": "this",
-                            "predicate": {
-                                "vehicle": {
-                                    "type": "minecraft:zombie_horse"
-                                }
-                            }
-                        }
-                    ],
                     "functions": [
                         {
-                            "add": false,
                             "count": {
                                 "type": "minecraft:uniform",
                                 "max": 1.0,
                                 "min": 0.0
                             },
-                            "function": "minecraft:set_count"
+                            "enchantment": "minecraft:looting",
+                            "function": "minecraft:enchanted_count_increase"
                         },
+                        {
+                            "conditions": [
+                                {
+                                    "condition": "minecraft:any_of",
+                                    "terms": [
+                                        {
+                                            "condition": "minecraft:entity_properties",
+                                            "entity": "this",
+                                            "predicate": {
+                                                "flags": {
+                                                    "is_on_fire": true
+                                                }
+                                            }
+                                        },
+                                        {
+                                            "condition": "minecraft:entity_properties",
+                                            "entity": "direct_attacker",
+                                            "predicate": {
+                                                "equipment": {
+                                                    "mainhand": {
+                                                        "predicates": {
+                                                            "minecraft:enchantments": [
+                                                                {
+                                                                    "enchantments": "#minecraft:smelts_loot"
+                                                                }
+                                                            ]
+                                                        }
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    ]
+                                }
+                            ],
+                            "function": "minecraft:furnace_smelt"
+                        }
+                    ],
+                    "name": "minecraft:cod",
+                    "weight": 3
+                },
+                {
+                    "type": "minecraft:item",
+                    "functions": [
                         {
                             "count": {
                                 "type": "minecraft:uniform",
@@ -67,7 +99,26 @@
                             "function": "minecraft:enchanted_count_increase"
                         }
                     ],
-                    "name": "minecraft:red_mushroom"
+                    "name": "minecraft:prismarine_crystals",
+                    "weight": 2
+                },
+                {
+                    "type": "minecraft:empty"
+                }
+            ],
+            "rolls": 1.0
+        },
+        {
+            "bonus_rolls": 0.0,
+            "conditions": [
+                {
+                    "condition": "minecraft:killed_by_player"
+                }
+            ],
+            "entries": [
+                {
+                    "type": "minecraft:item",
+                    "name": "minecraft:wet_sponge"
                 }
             ],
             "rolls": 1.0
@@ -91,15 +142,7 @@
             ],
             "entries": [
                 {
-                    "type": "minecraft:item",
-                    "name": "minecraft:iron_ingot"
-                },
-                {
-                    "type": "minecraft:item",
-                    "name": "minecraft:carrot"
-                },
-                {
-                    "type": "minecraft:item",
+                    "type": "minecraft:loot_table",
                     "functions": [
                         {
                             "conditions": [
@@ -138,34 +181,21 @@
                             "function": "minecraft:furnace_smelt"
                         }
                     ],
-                    "name": "minecraft:potato"
+                    "value": "minecraft:gameplay/fishing/fish"
                 }
             ],
             "rolls": 1.0
         },
         {
             "bonus_rolls": 0.0,
-            "conditions": [
-                {
-                    "condition": "minecraft:killed_by_player"
-                },
-                {
-                    "condition": "minecraft:entity_properties",
-                    "entity": "this",
-                    "predicate": {
-                        "flags": {
-                            "is_baby": true
-                        },
-                        "vehicle": {
-                            "type": "minecraft:chicken"
-                        }
-                    }
-                }
-            ],
             "entries": [
                 {
+                    "type": "minecraft:empty",
+                    "weight": 4
+                },
+                {
                     "type": "minecraft:item",
-                    "name": "minecraft:music_disc_lava_chicken"
+                    "name": "minecraft:tide_armor_trim_smithing_template"
                 }
             ],
             "rolls": 1.0
@@ -208,7 +238,7 @@
                             "function": "minecraft:enchanted_count_increase"
                         }
                     ],
-                    "name": "minecraft:rotten_flesh"
+                    "name": "minecraft:prismarine_shard"
                 }
             ],
             "rolls": 1.0
@@ -231,27 +261,59 @@
             "entries": [
                 {
                     "type": "minecraft:item",
-                    "conditions": [
-                        {
-                            "condition": "minecraft:entity_properties",
-                            "entity": "this",
-                            "predicate": {
-                                "vehicle": {
-                                    "type": "minecraft:zombie_horse"
-                                }
-                            }
-                        }
-                    ],
                     "functions": [
                         {
-                            "add": false,
                             "count": {
                                 "type": "minecraft:uniform",
                                 "max": 1.0,
                                 "min": 0.0
                             },
-                            "function": "minecraft:set_count"
+                            "enchantment": "minecraft:looting",
+                            "function": "minecraft:enchanted_count_increase"
                         },
+                        {
+                            "conditions": [
+                                {
+                                    "condition": "minecraft:any_of",
+                                    "terms": [
+                                        {
+                                            "condition": "minecraft:entity_properties",
+                                            "entity": "this",
+                                            "predicate": {
+                                                "flags": {
+                                                    "is_on_fire": true
+                                                }
+                                            }
+                                        },
+                                        {
+                                            "condition": "minecraft:entity_properties",
+                                            "entity": "direct_attacker",
+                                            "predicate": {
+                                                "equipment": {
+                                                    "mainhand": {
+                                                        "predicates": {
+                                                            "minecraft:enchantments": [
+                                                                {
+                                                                    "enchantments": "#minecraft:smelts_loot"
+                                                                }
+                                                            ]
+                                                        }
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    ]
+                                }
+                            ],
+                            "function": "minecraft:furnace_smelt"
+                        }
+                    ],
+                    "name": "minecraft:cod",
+                    "weight": 3
+                },
+                {
+                    "type": "minecraft:item",
+                    "functions": [
                         {
                             "count": {
                                 "type": "minecraft:uniform",
@@ -262,7 +324,37 @@
                             "function": "minecraft:enchanted_count_increase"
                         }
                     ],
-                    "name": "minecraft:red_mushroom"
+                    "name": "minecraft:prismarine_crystals",
+                    "weight": 2
+                },
+                {
+                    "type": "minecraft:empty"
+                }
+            ],
+            "rolls": 1.0
+        },
+        {
+            "bonus_rolls": 0.0,
+            "conditions": [
+                {
+                    "condition": "minecraft:killed_by_player"
+                },
+                {
+                    "condition": "minecraft:entity_properties",
+                    "entity": "attacking_player",
+                    "predicate": {
+                        "nbt": "{Tags:[\"role_warrior\"]}"
+                    }
+                },
+                {
+                    "condition": "minecraft:random_chance",
+                    "chance": 0.5
+                }
+            ],
+            "entries": [
+                {
+                    "type": "minecraft:item",
+                    "name": "minecraft:wet_sponge"
                 }
             ],
             "rolls": 1.0
@@ -297,15 +389,7 @@
             ],
             "entries": [
                 {
-                    "type": "minecraft:item",
-                    "name": "minecraft:iron_ingot"
-                },
-                {
-                    "type": "minecraft:item",
-                    "name": "minecraft:carrot"
-                },
-                {
-                    "type": "minecraft:item",
+                    "type": "minecraft:loot_table",
                     "functions": [
                         {
                             "conditions": [
@@ -344,11 +428,38 @@
                             "function": "minecraft:furnace_smelt"
                         }
                     ],
-                    "name": "minecraft:potato"
+                    "value": "minecraft:gameplay/fishing/fish"
+                }
+            ],
+            "rolls": 1.0
+        },
+        {
+            "bonus_rolls": 0.0,
+            "conditions": [
+                {
+                    "condition": "minecraft:entity_properties",
+                    "entity": "attacking_player",
+                    "predicate": {
+                        "nbt": "{Tags:[\"role_warrior\"]}"
+                    }
+                },
+                {
+                    "condition": "minecraft:random_chance",
+                    "chance": 0.5
+                }
+            ],
+            "entries": [
+                {
+                    "type": "minecraft:empty",
+                    "weight": 4
+                },
+                {
+                    "type": "minecraft:item",
+                    "name": "minecraft:tide_armor_trim_smithing_template"
                 }
             ],
             "rolls": 1.0
         }
     ],
-    "random_sequence": "minecraft:entities/zombie"
+    "random_sequence": "minecraft:entities/elder_guardian"
 }
