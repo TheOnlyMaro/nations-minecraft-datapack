@@ -14,6 +14,7 @@ Copy-Item -Path $sourcePath -Destination $destinationPath -Recurse
 $gitFolder = Join-Path $destinationPath ".git"
 $readmeFile = Join-Path $destinationPath "README.md"
 $psFile = Join-Path $destinationPath "sync-datapack.ps1"
+$referenceFolder = Join-Path $destinationPath "reference"
 
 # Delete the .git folder if it exists
 if (Test-Path $gitFolder) {
@@ -28,6 +29,11 @@ if (Test-Path $readmeFile) {
 # Delete the sync-datapack.ps1 file if it exists
 if (Test-Path $psFile) {
     Remove-Item -Path $psFile -Force
+}
+
+# Delete the reference folder if it exists
+if (Test-Path $referenceFolder) {
+    Remove-Item -Path $referenceFolder -Recurse -Force
 }
 
 Write-Host "Datapack synced and cleaned successfully!" -ForegroundColor Green
