@@ -5,4 +5,4 @@
 execute if score @s nations_jump matches 1.. if predicate nations:enchanter/alchemist_ingredients at @s run function nations:enchanter/alchemist_active
 
 # Reset jump score
-scoreboard players set @s nations_jump 0
+

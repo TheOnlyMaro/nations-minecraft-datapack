@@ -16,7 +16,7 @@ execute as @a[tag=role_farmer] run function nations:farmer/photosynthesis
 execute as @a[tag=role_farmer] run function nations:farmer/convert_held_beetroots
 
 # Enchanter Branch Tick Loop
-execute as @a[tag=role_enchanter] run function nations:enchanter/alchemist
+execute as @a[tag=role_enchanter] run function nations:enchanter/jump_handler
 function nations:nerf/clear_restricted_items
 
 

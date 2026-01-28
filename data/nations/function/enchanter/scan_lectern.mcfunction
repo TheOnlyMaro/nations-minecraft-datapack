@@ -2,8 +2,6 @@
 # Scans 10x10x10 volume centered on player
 # We restart at player position (run from blood_sacrifice at ~ ~ ~)
 
-# Debug
-tellraw @s {"text":"[DEBUG] Scanning for Lectern in 10x10 area...","color":"gray"}
 
 # We iterate Y from -5 to 5.
 # For each Y, we check 4 quadrants of 5x5 (scan_lectern_layer covers 0..4, 0..4)

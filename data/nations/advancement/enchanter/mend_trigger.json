@@ -1,0 +1,24 @@
+{
+    "criteria": {
+        "use_enchantment_table": {
+            "trigger": "minecraft:item_used_on_block",
+            "conditions": {
+                "location": [
+                    {
+                        "condition": "minecraft:location_check",
+                        "predicate": {
+                            "block": {
+                                "blocks": [
+                                    "minecraft:enchanting_table"
+                                ]
+                            }
+                        }
+                    }
+                ]
+            }
+        }
+    },
+    "rewards": {
+        "function": "nations:enchanter/blood_mend"
+    }
+}
