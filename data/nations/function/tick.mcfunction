@@ -21,7 +21,9 @@ function nations:nerf/clear_restricted_items
 
 
 
-# Persistent Roles / Markers
+# Check Death Reset
+execute as @a[scores={nations_deaths=1..}] run function nations:utils/death_check
+
 # Persistent Roles / Markers
 execute as @e[type=marker,tag=nations_composter_marker] at @s run function nations:farmer/composter_tick
 function nations:enchanter/summon_tick

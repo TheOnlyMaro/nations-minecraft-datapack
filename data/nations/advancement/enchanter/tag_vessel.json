@@ -1,0 +1,21 @@
+{
+    "criteria": {
+        "name_vessel": {
+            "trigger": "minecraft:player_interacted_with_entity",
+            "conditions": {
+                "item": {
+                    "items": [
+                        "minecraft:name_tag"
+                    ],
+                    "nbt": "{display:{Name:'{\"text\":\"Vessel\"}'}}"
+                },
+                "entity": {
+                    "type": "minecraft:pig"
+                }
+            }
+        }
+    },
+    "rewards": {
+        "function": "nations:enchanter/tag_vessel"
+    }
+}
