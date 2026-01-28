@@ -4,6 +4,11 @@
 # Explorer
 execute as @a[predicate=nations:is_explorer] at @s run function nations:explorer/rapid_transit
 execute as @a[predicate=nations:is_explorer] at @s run function nations:explorer/weightless_spirit
+
+# Explorer Soft-Nerf: Travel Fatigue (runs every 10 ticks for performance)
+scoreboard players add #fatigue_timer nations_pid 1
+execute if score #fatigue_timer nations_pid matches 10.. run function nations:explorer/travel_fatigue
+execute if score #fatigue_timer nations_pid matches 10.. run scoreboard players set #fatigue_timer nations_pid 0
 # Explorer Trigger
 scoreboard players enable @a[predicate=nations:is_explorer] nations_trigger_backpack
 execute as @a[predicate=nations:is_explorer,scores={nations_trigger_backpack=1..}] run function nations:explorer/backpack_swap
