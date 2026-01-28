@@ -16,6 +16,7 @@ scoreboard objectives add nations_cd_breeding dummy
 scoreboard objectives add nations_photo_timer dummy
 scoreboard objectives add nations_cd_vengeance dummy
 scoreboard objectives add nations_summon_age dummy
+scoreboard objectives add nations_cd_skymage dummy
 scoreboard objectives add nations_jump minecraft.custom:minecraft.jump
 
 

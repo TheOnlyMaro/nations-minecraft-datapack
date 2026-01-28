@@ -5,6 +5,8 @@
 scoreboard players remove @a[scores={nations_cd_adrenaline=1..}] nations_cd_adrenaline 1
 # Farmer
 scoreboard players remove @a[scores={nations_cd_vengeance=1..}] nations_cd_vengeance 1
+# Enchanter
+scoreboard players remove @a[scores={nations_cd_skymage=1..}] nations_cd_skymage 1
 
 # Global Cooldowns
 scoreboard players remove #GLOBAL nations_global_warcry_cd 1
