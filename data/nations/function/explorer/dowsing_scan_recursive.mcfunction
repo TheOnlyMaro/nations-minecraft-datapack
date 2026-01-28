@@ -4,7 +4,8 @@
 
 # Initialize
 scoreboard players set #found nations_pid 0
-scoreboard players set #dowsing_radius nations_pid 1
+scoreboard players set #dowsing_radius nations_pid 0
+scoreboard players set #dowsing_max nations_pid 32
 
 # Start recursive shell expansion
-function nations:explorer/dowsing_expand_shell
+function nations:explorer/dowsing_expand_layer

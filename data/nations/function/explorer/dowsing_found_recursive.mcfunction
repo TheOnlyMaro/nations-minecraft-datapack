@@ -2,10 +2,12 @@
 # Called when dowsing target is found during recursive scan
 # Stores coordinates and calculates distance category
 
-# Store the found block coordinates
-execute store result storage nations:dowsing target_x int 1 run data get entity @s Pos[0]
-execute store result storage nations:dowsing target_y int 1 run data get entity @s Pos[1]
-execute store result storage nations:dowsing target_z int 1 run data get entity @s Pos[2]
+# Store the found block coordinates using a temporary marker
+summon marker ~ ~ ~ {Tags:["dowsing_temp"]}
+execute store result storage nations:dowsing target_x int 1 run data get entity @e[type=marker,tag=dowsing_temp,limit=1] Pos[0]
+execute store result storage nations:dowsing target_y int 1 run data get entity @e[type=marker,tag=dowsing_temp,limit=1] Pos[1]
+execute store result storage nations:dowsing target_z int 1 run data get entity @e[type=marker,tag=dowsing_temp,limit=1] Pos[2]
+kill @e[type=marker,tag=dowsing_temp]
 
 # Calculate distance from player to target
 # Use radius as distance approximation
