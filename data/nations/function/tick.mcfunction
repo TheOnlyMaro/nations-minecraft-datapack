@@ -3,6 +3,7 @@
 
 # Explorer
 execute as @a[predicate=nations:is_explorer] at @s run function nations:explorer/rapid_transit
+execute as @a[predicate=nations:is_explorer] at @s run function nations:explorer/weightless_spirit
 # Explorer Trigger
 scoreboard players enable @a[predicate=nations:is_explorer] nations_trigger_backpack
 execute as @a[predicate=nations:is_explorer,scores={nations_trigger_backpack=1..}] run function nations:explorer/backpack_swap
@@ -34,6 +35,7 @@ scoreboard players remove @a[scores={nations_cooldown_sethome=1..}] nations_cool
 scoreboard players remove @a[scores={nations_warmup=1..}] nations_warmup 1
 scoreboard players remove @a[scores={nations_combat_timer=1..}] nations_combat_timer 1
 scoreboard players remove @a[scores={nations_dowsing_cooldown=1..}] nations_dowsing_cooldown 1
+scoreboard players remove @a[scores={nations_weightless_cd=1..}] nations_weightless_cd 1
 
 # Explorer Dowsing Trigger
 scoreboard players enable @a[predicate=nations:is_explorer] nations_dowsing

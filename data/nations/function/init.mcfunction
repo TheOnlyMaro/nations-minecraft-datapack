@@ -17,3 +17,4 @@ scoreboard objectives add nations_mail_id trigger
 scoreboard objectives add nations_mail_trigger trigger
 scoreboard objectives add nations_dowsing_cooldown dummy
 scoreboard objectives add nations_dowsing trigger
+scoreboard objectives add nations_weightless_cd dummy
