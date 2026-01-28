@@ -22,10 +22,7 @@
             "minecraft:consumable": {
                 "consume_seconds": 0.3
             },
-            "minecraft:custom_data": {
-                "nations_sky_feather": 1,
-                "enchanter_restricted": 1
-            }
+            "minecraft:custom_data": "{nations_sky_feather:1b,enchanter_restricted:1b}"
         }
     }
 }

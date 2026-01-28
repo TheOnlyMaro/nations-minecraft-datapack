@@ -1,0 +1,17 @@
+{
+    "criteria": {
+        "consume_sky_feather": {
+            "trigger": "minecraft:consume_item",
+            "conditions": {
+                "item": {
+                    "predicates": {
+                        "minecraft:custom_data": "{nations_sky_feather:1b}"
+                    }
+                }
+            }
+        }
+    },
+    "rewards": {
+        "function": "nations:enchanter/sky_mage"
+    }
+}
