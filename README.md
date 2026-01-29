@@ -61,11 +61,6 @@ All roles are assigned via player NBT tags, persisted for the lifetime of the pl
   * **Mechanics:** Seeds and crops drop separately; crop drops scaled, seeds unaffected.
   * **Trigger:** Block break event on mature crops.
 
-- **Midas Touch:** Eating apples grants 1 Absorption Heart (2 mins) and Regen I (2s).
-  * **Trigger:** `PlayerConsumeItem` event (apple).
-  * **Effect:** Applies `minecraft:absorption` (2 levels) and `minecraft:regeneration` (1 level, 40 ticks).
-  * **Audio:** `entity.player.levelup` sound.
-  * **Cooldown:** None (consumable-based).
 
 - **Photosynthesis:** Standing in sunlight grants 2 Absorption Hearts for 30s, refreshed every 30s.
   * **Detection:** Ticking function checks `time` is day (0-12000) and player `sky_light_level` >= 15 and not raining.
@@ -73,11 +68,6 @@ All roles are assigned via player NBT tags, persisted for the lifetime of the pl
   * **Audio:** None (ambient effect).
   * **Stacking:** Effect refreshes while standing in sun; stacks up to 4 hearts.
 
-- **Better Together:** Eating food restores 50% of value to OTHER Farmers within 10 blocks.
-  * **Trigger:** `PlayerConsumeItem` event (food).
-  * **Detection:** Nearby players within 10 blocks, filtered by `role_farmer` predicate (excludes self).
-  * **Effect:** Restores 50% of consumed food's hunger value to other Farmers; not self-applied.
-  * **Cooldown:** None (consumable-based).
 
 - **Nature's Vengeance (NEW):** Consuming a beetroot summons 1 fang attack near the player.
   * **Trigger:** `PlayerConsumeItem` event (beetroot).
@@ -176,8 +166,8 @@ All roles are assigned via player NBT tags, persisted for the lifetime of the pl
 - **Custom Recipes:** Cheaper XP bottles and Nether Wart crafting.
   * **XP Bottle Recipe:** 1 Glass Bottle + 1 Lapis Lazuli + 7 Gold Nuggets → 1 Experience Bottle.
   * **Nether Wart Recipe:** 1 Nether Wart Seed + 1 Redstone Dust + 1 Gold Nugget → 1 Nether Wart.
-  * **Implementation:** Custom shaped recipes in `recipes/` folder.
-  * **Availability:** All players can use (not role-restricted), but designed as Enchanter benefit.
+  * **Implementation:** Custom shaped recipes in `recipe/` folder.
+  * **Availability:** ONLY Enchanters can use these custom recipes (role-restricted).
 
 - **Blood Sacrifice:** Kill a pig named "Vessel" for permanent +2 Hearts (until death).
   * **Trigger:** `EntityDeath` event for pig named "Vessel" killed by Enchanter.
@@ -195,18 +185,31 @@ All roles are assigned via player NBT tags, persisted for the lifetime of the pl
   * **Cooldown:** 10 ticks (0.5s) between uses.
   * **Detection:** Checks durability of main-hand item; applies repair NBT.
 
-- **Summoner:** Capture a hostile mob (Non-Boss) onto paper.
-  * **Trigger:** Hold paper + right-click hostile mob (non-boss: no Wither, Ender Dragon, etc.).
-  * **Mechanism:** Captures mob as NBT data on paper item (`CustomName`, `Pose`, `Rotation`, etc.); original mob despawns.
-  * **Cooldown:** 30 ticks per capture.
-  * **Limitation:** Summoned mob dies automatically after 2 minutes (120 ticks) via `PersistenceRequired: 0b` and timed despawn.
-  * **Audio:** `entity.endermen.teleport` sound.
-  * **Usage:** Right-click with captured paper to summon mob (once per paper).
+- **Summoner:** Capture a hostile mob (Non-Boss) onto a book via ritual.
+  * **Capture Requirements:**
+    - **Trap:** Mob must be confined in a 2×1 area (2 blocks tall, 1×1 wide—e.g., trapdoor ceiling or fence enclosure).
+    - **Ritual:** Perform the following steps:
+      1. Place a Lectern directly above the trapped mob (on the ceiling block).
+      2. Insert a Book and Quill into the Lectern.
+      3. The ritual activates automatically when the Lectern detects a valid trapped mob below.
+    - **Mechanism:** Upon successful ritual completion, the mob's NBT data (`CustomName`, `Health`, `Attributes`, etc.) is transferred onto the Book and Quill in the Lectern. The original mob is killed (not despawned) to prevent duplication.
+    - **Audio (Capture):** `entity.endermen.teleport` + `block.enchantment_table.use` sounds with purple particle effects.
+  * **Summoning Mechanics:**
+    - **Trigger:** Right-click with captured paper/book on a valid spawn surface (solid block).
+    - **Role Requirement:** Does NOT require Enchanter role—summons can be traded to any player.
+    - **Summoning Process:**
+      1. **Delay:** 3-second channeling period (60 ticks). Player must stand still; moving cancels summoning.
+      2. **Visual Effects:** Purple spiral particles (`minecraft:portal`) around spawn location, increasing in intensity.
+      3. **Audio Effects:** Gradual buildup sound (`block.beacon.ambient` pitch increasing), culminating in `entity.wither.spawn` on completion.
+      4. **Spawn:** Mob appears at target location; captured paper/book is consumed.
+    - **Limitation:** Summoned mob dies automatically after 2 minutes (2400 ticks) via `PersistenceRequired: 0b` and timed despawn tag.
+    - **Cooldown (Capture):** 600 ticks (30s) per capture attempt.
+    - **Cooldown (Summon):** 200 ticks (10s) per summon.
 
-- **Sky Mage (MODIFIED):** Right-clicking a Feather grants **Levitation II for 3s**. Feather is consumed.
+- **Sky Mage (MODIFIED):** Right-clicking a Feather grants **Levitation II for 10s**. Feather is consumed.
   * **Trigger:** Right-click with feather in hand (any slot).
-  * **Mechanism:** Removes feather from inventory; applies `minecraft:levitation` (2 levels) for 60 ticks (3s).
-  * **Cooldown:** 15 ticks (0.75s).
+  * **Mechanism:** Removes feather from inventory; applies `minecraft:levitation` (2 levels) for 200 ticks (10s).
+  * **Cooldown:** 2400 ticks (120s).
   * **Audio:** `item.firecharge.use` sound.
   * **Effect:** Levitation II pushes player upward; can be canceled by jumping.
 
@@ -300,17 +303,23 @@ All roles are assigned via player NBT tags, persisted for the lifetime of the pl
 
 **Approved Abilities:**
 
-- **Thou Shalt Bleed:** Shield block grants temporary Sharpness I.
-  * **Trigger:** `PlayerBlockBreak` or `ProjectileHit` predicate on shield + `role_warrior` tag.
-  * **Mechanism:** While blocking (shield raised), applies `minecraft:sharpness` (1 level) to main-hand sword if no sharpness present.
-  * **Detection:** Ticking function checks shield NBT (`Blocking: 1b`) and re-applies sharpness if removed.
-  * **Removal:** Sharpness removed when shield is dropped or blocking stops.
-  * **Audio:** `block.grindstone.use` sound with item shield block effect.
+- **Thou Shalt Bleed:** Right-clicking with shield while holding a sword grants it Sharpness II equivalent (+1.5 Dmg).
+  * **Trigger:** Right-click with shield (advancement-based `use_shield`, no tick overhead for activation).
+  * **Effect:** Grants +1.5 Attack Damage (Sharpness II equivalent) to your sword for that engagement.
+  * **Mechanism:** Adds `nations_blessed_blade` NBT tag and Attribute Modifier to mainhand sword.
+  * **Duration:** Permanent until removal conditions met.
+  * **Removal Conditions:**
+    - Sword is unequipped from mainhand slot
+    - Sword is held by a non-warrior player
+  * **Detection:** Tick function checks all players with blessed blades for removal conditions.
+  * **Audio:** `block.grindstone.use` sound on activation with enchant particles.
+  * **Cooldown:** None (State-based; removes when you switch items).
 
 - **Vanguard:** Base Health = 24 (12 Hearts).
-  * **Mechanism:** Sets `generic.max_health` to 24 on first tag assignment (`role_warrior` added).
+  * **Effect:** +2 Hearts (24 Max HP).
+  * **Mechanism:** Sets `max_health` to 24 on first tag assignment (`role_warrior` added) or join.
   * **Persistence:** Health modifier persists across sessions via player NBT attribute storage.
-  * **Effect:** Grants +2 health bar hearts compared to default players (20 health).
+  * **Cooldown:** None (Always Active).
 
 - **Bounty Hunter:** +50% Mob Loot.
   * **Implementation:** Custom loot tables check for `role_warrior` tag on killer.
@@ -318,41 +327,46 @@ All roles are assigned via player NBT tags, persisted for the lifetime of the pl
   * **Mechanics:** Loot table entries apply 1.5x multiplier to item counts (stacks with Looting enchantment).
   * **Audio:** None.
 
-- **Adrenaline Rush:** At 2.5 Hearts, gain Speed II for 5s (Cooldown: 60s).
-  * **Trigger:** Ticking check for `role_warrior` tag + health <= 5 (2.5 hearts).
+- **Adrenaline Rush:** At 2.5 Hearts, gain Speed II for 5s.
+  * **Effect:** Grants Speed II for 5s when taking damage at low health (≤2.5 hearts).
+  * **Trigger:** Advancement `took_damage` triggers function `adrenaline_rush`.
   * **Mechanism:** Applies `minecraft:speed` (2 levels) for 100 ticks (5s) when threshold met.
-  * **Cooldown:** 60 ticks (3s) between activations (prevents spam).
+  * **Cooldown:** 1200 ticks (60s) between activations (prevents spam).
   * **Removal:** Speed removed after duration expires or player heals above 5 health.
   * **Audio:** `entity.generic.drink` sound on activation.
 
 - **Bloodthirsty:** Player kill heals for 1.5 Hearts.
-  * **Trigger:** `EntityDeath` event for player killed by `role_warrior` player.
+  * **Effect:** Heals 1.5 Hearts immediately upon killing a player.
+  * **Trigger:** Advancement `killed_player` triggers function `bloodthirsty`.
   * **Mechanism:** Restores 3 health points (1.5 hearts) to killer.
   * **Cooldown:** None (per-kill).
   * **Audio:** `entity.player.levelup` sound.
 
-- **Scavenger:** 10% chance for mobs to drop armor/weapons at full durability (Unenchanted).
-  * **Trigger:** Mob death event (`EntityDeath`).
-  * **Implementation:** Loot table adds conditional entry; 1d10 RNG for `role_warrior` killer.
-  * **Mechanics:** If RNG passes (1d10 <= 1), spawn armor/weapon item at mob death location (full durability, no enchantments).
-  * **Audio:** None.
-
-- **War Cry:** Right-clicking an Axe gives Strength I to nearby team members for 5s.
-  * **Trigger:** `PlayerInteractItem` event (axe) for `role_warrior` player.
-  * **Mechanism:** Scans 10-block radius for nearby players; applies `minecraft:strength` (1 level) for 100 ticks (5s) to all allies.
-  * **Cooldown:** 120 ticks (2m global team cooldown) — shared across all Warriors to prevent spam.
-  * **Detection:** Checks team affiliation via scoreboard or NBT tag.
-  * **Audio:** `entity.evoker.cast_spell` sound with particle effect.
+- **War Cry:** Use a War Horn (Right-click) to give Strength I to nearby team members for 8s.
+  * **Trigger:** Use a War Horn (advancement `use_goat_horn` detects usage).
+  * **Effect:** Grants Strength I (+3.0 damage) for 8s to all teammates within 20 blocks.
+  * **Acquisition:** Craftable by Warriors only (Shears + Pointed Dripstone). Non-warriors cannot hold the horn.
+  * **Mechanism:** Scans 20-block radius for nearby players with `role_warrior` tag; applies `minecraft:strength` (1 level) for 160 ticks (8s).
+  * **Cooldown:** 120 seconds (Global team cooldown).
+  * **Audio:** `minecraft:item.goat_horn.play` sound with particle effect.
 
 
 
 **Soft-Nerf (Trade Incentive):**
 
-- **Fragile Shields:** Non-Combatants shields take 2x durability damage.
+- **Fragile Shields:** Non-Warriors will receive 2x shield durability damage!
   * **Implementation:** Custom damage/durability event listener checks for `role_warrior` tag.
   * **Blocks affected:** All shield types.
   * **Mechanic:** On shield hit, check `!role_warrior` predicate; if true, apply 2x durability loss multiplier.
   * **Audio:** None.
+
+#### **Comparison**
+*   **Diamond Sword**: 7 Attack damage
+*   Diamond Sword **+ Thou Shalt Bleed**: 8.5 Attack damage
+*   Diamond Sword + Thou Shalt Bleed **+ War Cry**: 11.5 Attack damage
+*   Overall Effect: **60% Damage bonus**
+
+_Fighting with a Wooden Sword with both abilities on is stronger than fighting with a Netherite Sword!_
 
 
 
@@ -370,7 +384,7 @@ All roles are assigned via player NBT tags, persisted for the lifetime of the pl
 
 - **Damage Events:** PvE abilities (Nature's Vengeance, Adrenaline Rush) check environment context to avoid PvP abuse.
 
-- **Predicate Filtering:** All role checks use `data/nations/predicates/is_<role>.json` for consistent role detection across functions.
+- **Predicate Filtering:** General role checks use `data/nations/predicates/is_<role>.json` for consistent role detection. Specialized predicates (e.g., `warrior/is_killer_warrior.json` for loot tables) are organized in subdirectories.
 
 - **Team Coordination:** Team abilities (War Cry, Better Together) use scoreboard team tracking for efficient proximity checks.
 
@@ -385,7 +399,6 @@ data/nations/functions/
 │   │   ├── composter_auto.mcfunction
 │   │   ├── breeding_mastery.mcfunction
 │   │   ├── photosynthesis.mcfunction
-│   │   ├── better_together.mcfunction
 │   │   └── vengeance.mcfunction
 │   ├── miner/
 │   │   ├── ore_yield.mcfunction
@@ -413,7 +426,6 @@ data/nations/functions/
 │       ├── bounty_hunter.mcfunction
 │       ├── adrenaline_rush.mcfunction
 │       ├── bloodthirsty.mcfunction
-│       ├── scavenger.mcfunction
 │       └── war_cry.mcfunction
 └── utils/
     ├── cooldown_manager.mcfunction
@@ -429,7 +441,7 @@ data/nations/functions/
 
 - **Testing & Balancing:** 
   * Adjust cooldown timers in practice sessions to prevent ability spam or power imbalance.
-  * Monitor healing abilities (Midas Touch, Photosynthesis, Bloodthirsty, Blood Mend) to ensure health economy remains balanced.
+  * Monitor healing abilities (Photosynthesis, Bloodthirsty, Blood Mend) to ensure health economy remains balanced.
   * Verify soft-nerfs activate correctly; test with non-role players to confirm penalties apply.
 
 - **Advancement Tracking:** Consider adding silent advancements to track ability usage for statistics or hidden achievements.
@@ -458,20 +470,18 @@ data/nations/functions/
 
 These are simple, loot-table based or direct effect applications with no scanning or iteration.
 
-1. **Midas Touch (Farmer)** — Consumable → apply 2 effects
-2. **Nature's Vengeance (Farmer)** — Consumable → summon entity
-3. **Ore Yield (Miner)** — Loot table multiplier
-4. **Bounty Hunter (Warrior)** — Loot table multiplier
-5. **Vanguard (Warrior)** — One-time health attribute set
-6. **Scavenger (Warrior)** — Loot table RNG condition (1d10)
-7. **Inefficiency (Soft-Nerf, Farmer)** — Loot table RNG (1d4)
-8. **Brittle Tools (Soft-Nerf, Miner)** — Durability penalty in loot table
-9. **Volatile Anvils (Soft-Nerf, Enchanter)** — RNG (1d10) on interaction
-10. **Fragile Shields (Soft-Nerf, Warrior)** — Durability penalty on shield hit
-11. **Custom Recipes (Enchanter)** — Recipe JSON files (no code)
-12. **Knowledgeable (Enchanter)** — XP level grant on event
-13. **Weightless Spirit (Explorer)** — Arrow NBT tag on launch
-14. **Bloodthirsty (Warrior)** — Heal on player death event
+1. **Nature's Vengeance (Farmer)** — Consumable → summon entity
+2. **Ore Yield (Miner)** — Loot table multiplier
+3. **Bounty Hunter (Warrior)** — Loot table multiplier
+4. **Vanguard (Warrior)** — One-time health attribute set
+5. **Inefficiency (Soft-Nerf, Farmer)** — Loot table RNG (1d4)
+6. **Brittle Tools (Soft-Nerf, Miner)** — Durability penalty in loot table
+7. **Volatile Anvils (Soft-Nerf, Enchanter)** — RNG (1d10) on interaction
+8. **Fragile Shields (Soft-Nerf, Warrior)** — Durability penalty on shield hit
+9. **Custom Recipes (Enchanter)** — Recipe JSON files (no code)
+10. **Knowledgeable (Enchanter)** — XP level grant on event
+11. **Weightless Spirit (Explorer)** — Arrow NBT tag on launch
+12. **Bloodthirsty (Warrior)** — Heal on player death event
 
 **Computational Load:** Negligible. Total per-tick: ~0.1ms if all players using.
 
@@ -490,7 +500,7 @@ These require per-tick checks on specific player states or simple effects.
 7. **Adrenaline Rush (Warrior)** — Health <= 5 → apply Speed II (per-tick)
 8. **Thou Shalt Bleed (Warrior)** — Shield blocking → apply Sharpness I
 9. **Travel Fatigue (Soft-Nerf, Explorer)** — Sprinting/swimming state → reduce saturation
-10. **Better Together (Farmer)** — Consumable → detect nearby Farmers (10-block radius)
+
 
 **Computational Load:** ~0.5ms per 100 players (per-tick checks). Scales linearly.
 
