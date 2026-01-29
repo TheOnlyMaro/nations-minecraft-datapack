@@ -11,6 +11,6 @@
         }
     },
     "rewards": {
-        "function": "nations:enchanter/blood_sacrifice"
+        "function": "nations:enchanter/blood_sacrifice/blood_sacrifice"
     }
 }

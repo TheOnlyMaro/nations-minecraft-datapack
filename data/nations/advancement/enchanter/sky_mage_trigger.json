@@ -12,6 +12,6 @@
         }
     },
     "rewards": {
-        "function": "nations:enchanter/sky_mage"
+        "function": "nations:enchanter/sky_mage/sky_mage"
     }
 }

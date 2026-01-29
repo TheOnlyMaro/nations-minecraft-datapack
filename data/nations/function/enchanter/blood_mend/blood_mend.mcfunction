@@ -14,5 +14,5 @@ execute unless entity @s[tag=role_enchanter] run return 0
 # Store damage to score
 execute store result score #current_damage nations_temp run data get entity @s SelectedItem.components."minecraft:damage"
 # Check if damage > 0
-execute if score #current_damage nations_temp matches 1.. run function nations:enchanter/blood_mend_apply
+execute if score #current_damage nations_temp matches 1.. run function nations:enchanter/blood_mend/blood_mend_apply
 

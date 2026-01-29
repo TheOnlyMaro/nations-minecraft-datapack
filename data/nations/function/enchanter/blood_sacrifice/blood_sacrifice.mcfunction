@@ -17,10 +17,10 @@ execute if entity @s[tag=nations_sacrificed] run return 0
 # We will check if the function 'check_lectern' finds one.
 # We use a tag system: reset 'found_lectern', run scan, check 'found_lectern'.
 tag @s remove found_lectern
-execute run function nations:enchanter/scan_lectern
+execute run function nations:enchanter/blood_sacrifice/scan_lectern
 
 # 4. If found, Apply Effects
-execute if entity @s[tag=found_lectern] run function nations:enchanter/blood_sacrifice_apply
+execute if entity @s[tag=found_lectern] run function nations:enchanter/blood_sacrifice/blood_sacrifice_apply
 execute unless entity @s[tag=found_lectern] run tellraw @s {"text":"The ritual requires a Lectern with a Book & Quill nearby...","color":"dark_red"}
 
 

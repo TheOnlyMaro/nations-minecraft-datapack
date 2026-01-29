@@ -1,6 +1,6 @@
 {
     "criteria": {
-        "use_enchantment_table": {
+        "use_lectern": {
             "trigger": "minecraft:item_used_on_block",
             "conditions": {
                 "location": [
@@ -9,8 +9,11 @@
                         "predicate": {
                             "block": {
                                 "blocks": [
-                                    "minecraft:enchanting_table"
-                                ]
+                                    "minecraft:lectern"
+                                ],
+                                "state": {
+                                    "has_book": "true"
+                                }
                             }
                         }
                     }
@@ -19,6 +22,6 @@
         }
     },
     "rewards": {
-        "function": "nations:enchanter/blood_mend/blood_mend"
+        "function": "nations:enchanter/summoner/summoner_capture"
     }
 }

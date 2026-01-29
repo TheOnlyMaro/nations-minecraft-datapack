@@ -10,6 +10,6 @@
         ]
     ],
     "rewards": {
-        "function": "nations:enchanter/knowledgeable"
+        "function": "nations:enchanter/knowledgeable/knowledgeable"
     }
 }

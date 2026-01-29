@@ -16,6 +16,6 @@
         }
     },
     "rewards": {
-        "function": "nations:enchanter/tag_vessel"
+        "function": "nations:enchanter/blood_sacrifice/tag_vessel"
     }
 }
