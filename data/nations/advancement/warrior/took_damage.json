@@ -1,0 +1,22 @@
+{
+    "criteria": {
+        "took_damage": {
+            "trigger": "minecraft:entity_hurt_player",
+            "conditions": {
+                "player": [
+                    {
+                        "condition": "minecraft:entity_properties",
+                        "entity": "this",
+                        "predicate": {
+                            "type": "minecraft:player",
+                            "nbt": "{Tags:[\"role_warrior\"]}"
+                        }
+                    }
+                ]
+            }
+        }
+    },
+    "rewards": {
+        "function": "nations:warrior/adrenaline_rush"
+    }
+}

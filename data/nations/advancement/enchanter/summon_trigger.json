@@ -1,0 +1,20 @@
+{
+    "criteria": {
+        "use_summon_shield": {
+            "trigger": "minecraft:using_item",
+            "conditions": {
+                "item": {
+                    "items": [
+                        "minecraft:shield"
+                    ],
+                    "predicates": {
+                        "minecraft:custom_data": "{nations_summon_item:1b}"
+                    }
+                }
+            }
+        }
+    },
+    "rewards": {
+        "function": "nations:enchanter/summoner/summoner_summon"
+    }
+}

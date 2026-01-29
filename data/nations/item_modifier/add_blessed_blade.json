@@ -1,0 +1,20 @@
+[
+    {
+        "function": "minecraft:set_components",
+        "components": {
+            "minecraft:custom_data": {
+                "nations_blessed_blade": 1
+            },
+            "minecraft:enchantment_glint_override": true,
+            "minecraft:attribute_modifiers": [
+                {
+                    "type": "minecraft:attack_damage",
+                    "id": "nations:blessed_blade_damage",
+                    "amount": 1.5,
+                    "operation": "add_value",
+                    "slot": "mainhand"
+                }
+            ]
+        }
+    }
+]
