@@ -11,11 +11,11 @@ execute unless entity @s[level=5..] run return fail
 
 # Display Header
 tellraw @s [{"text":"━━━━━━━━━━━━ ","color":"dark_aqua","bold":true},{"text":"SEND MAIL","color":"aqua","bold":true},{"text":" ━━━━━━━━━━━━","color":"dark_aqua","bold":true}]
-tellraw @s {"text":"Type: /trigger nations_mail_id set <number>","color":"gray","italic":true}
+tellraw @s {"text":"Type: /trigger mailto set <number>","color":"gray","italic":true}
 tellraw @s {"text":""}
 
 # List all online players with their IDs
-execute as @a run tellraw @a[predicate=nations:is_explorer,scores={nations_mail_trigger=1..},limit=1] [{"text":"  ","color":"gray"},{"score":{"name":"@s","objective":"nations_pid"},"color":"gold","bold":true},{"text":" - ","color":"gray"},{"selector":"@s","color":"yellow"}]
+execute as @a run tellraw @a[predicate=nations:is_explorer,scores={maillist=1..},limit=1] [{"text":"  ","color":"gray"},{"score":{"name":"@s","objective":"nations_pid"},"color":"gold","bold":true},{"text":" - ","color":"gray"},{"selector":"@s","color":"yellow"}]
 
 # Footer
 tellraw @s {"text":""}

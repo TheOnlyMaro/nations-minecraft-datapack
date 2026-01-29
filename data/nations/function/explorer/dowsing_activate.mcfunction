@@ -1,5 +1,5 @@
 # nations:explorer/dowsing_activate
-# Triggered by /trigger nations_dowsing
+# Triggered by /trigger dowsing
 # Scans for chests/spawners in 30x30 radius and reports to player
 
 # Check: Must be Explorer (redundant but safe)
