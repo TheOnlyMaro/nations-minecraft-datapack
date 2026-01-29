@@ -1,7 +1,7 @@
 {
     "type": "minecraft:crafting_shapeless",
     "ingredients": [
-        "minecraft:nether_wart",
+        "minecraft:wheat_seeds",
         "minecraft:redstone",
         "minecraft:gold_nugget"
     ],

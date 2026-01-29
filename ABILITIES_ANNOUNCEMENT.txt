@@ -1,0 +1,125 @@
+*Warrior Class implementation and testing complete!*
+
+*Passive Abilities:*
+_*Vanguard*_
+• *Effect:* +2 Hearts (24 Max HP).
+• *Cooldown:* None (Always Active).
+
+_*Adrenaline Rush*_
+• *Effect:* Grants Speed II for 5s when taking damage at low health (≤2.5 hearts).
+• *Cooldown:* 3 seconds.
+
+_*Bloodthirsty*_
+• *Effect:* Heals 1.5 Hearts immediately upon killing a player.
+• *Cooldown:* None.
+
+*Active Abilities:*
+_*Thou Shalt Bleed*_
+• *Trigger:* Block with Shield while holding a Sword.
+• *Effect:* Grants +1.5 Attack Damage (Sharpness II equivalent) to your sword for that engagement.
+• *Cooldown:* None (State-based; removes when you switch items).
+
+_*War Cry*_
+• *Trigger:* Use a War Horn or Goat Horn (Right-click).
+• *Effect:* Grants Strength I (+3.0 damage) for 8s to all teammates within 20 blocks.
+• *Cooldown:* 120 seconds (Global).
+
+*Custom Recipe:*
+_*War Horn:* Shears (returned) + Pointed Dripstone_  
+
+*Non-role Nerf:*
+_*Fragile Shields:* Non-Warriors will receive 2x shield durability damage!_
+
+==*Comparison*==
+• *Diamond Sword*: 7 Attack damage
+• Diamond Sword *+ Thou Shalt Bleed*: 8.5 Attack damage
+• Diamond Sword + Thou Shalt Bleed *+ War Cry*: 11.5 Attack damage
+• Overall Effect: *60% Damage bonus*
+
+_Fighting with a Wooden Sword with both abilities on is stronger than fighting with a Netherite Sword!_
+
+---
+
+*Farmer Class*
+
+*Passive Abilities:*
+_*Photosynthesis*_
+• *Effect:* Standing in direct sunlight grants Absorption I (2 golden hearts) for 30 seconds.
+• *Cooldown:* Triggered after 10s in sunlight.
+
+_*Breeding Mastery*_
+• *Effect:* Reduces animal breeding cooldown to 2.5 minutes (normally 5).
+• *Cooldown:* None.
+
+_*Automated Composter*_
+• *Effect:* Composters you place boost crop growth in a 9x9 area to 2x!
+• *Cooldown:* None.
+
+_*Optimized Yield*_
+• *Effect:* Gain 50% additional crop yields when harvesting
+
+*Active Abilities:*
+_*Nature's Vengeance*_
+• *Trigger:* Eat a super Beetroot.
+• *Effect:* Summons a line of 4 Evoker Fangs in front of you to ward off enemies.
+• *Cooldown:* 5 seconds.
+
+
+*Non-role Nerf:*
+_*Natural Incompetence:* Non-Farmers have a reduced yield when harvesting certain crops!_
+
+
+==*Comparison*==
+• *Composter Automation* _200%_ + *Optimized Yield* _150%_ + *Natural Incompetence* _75% enemy nerf_ = *4x enemies' farming output!*
+---
+
+*Enchanter Class implementation and testing complete!*
+
+*Passive Abilities:*
+_*Knowledgeable*_
+• *Effect:* Refunds 1 XP level immediately after enchanting an item.
+• *Cooldown:* None.
+
+_*Alchemist*_
+• *Effect:* Charge a Brewing Stand while holding ingredients to refuel it (+10 fuel).
+• *Trigger:* Jumping while looking at a brewing stand holding Gold Nugget (Mainhand) and Lapis Lazuli (Offhand)
+• *Cooldown:* None.
+
+*Active Abilities:*
+_*Sky Mage*_
+• *Trigger:* Use a Sky Feather (Right-click).
+• *Effect:* Grants Levitation II for 10 seconds.
+• *Cooldown:* 20 seconds.
+
+_*Blood Sacrifice*_
+• *Trigger:* Kill a Pig named "Vessel" near a Lectern with a Book & Quill.
+• *Effect:* Permanently increases Max Health to 24 HP (+4 Hearts) until death.
+• *Cooldown:* One-time ritual per spawn (60s Soul Sickness debuffs applied: Weakness, Darkness and Slowness).
+
+_*Blood Mend*_
+• *Trigger:* Use Enchanting Table with damaged item (Mainhand) + XP Bottle (Offhand).
+• *Effect:* Repairs 200 durability to the item.
+• *Cooldown:* Costs your Vigor (Reverses Blood Sacrifice) and causes Soul Sickness.
+
+_*Summoner*_
+• *Trigger:* Offhand Amethyst Shard and Book & Quill interaction with Lectern traps the soul of the mob trapped underneath you. 
+• *Effect:* Use Summon item and make it fight for you for 2 minutes, or sell it to an ally team.
+• *Cooldown:* 5-second channeling delay on summon.
+
+*Custom Recipe:*
+_*Sky Feather:* Feather + Experience Bottle_
+_*Nether Wart:*_ Seeds, gold nugget and redstone
+_*Experience Bottle:*_ Glass bottle (middle bottom), Lapis Lazuli (middle), and 7 Gold Nuggets
+
+*Non-role Nerf:*
+_*Fragile Anvils:* Non-Enchanters have a 10% chance to destroy anvils on touch!_
+
+---
+
+*Miner Class*
+_Implementation In Progress..._
+
+---
+
+*Explorer Class*
+_Implementation In Progress..._

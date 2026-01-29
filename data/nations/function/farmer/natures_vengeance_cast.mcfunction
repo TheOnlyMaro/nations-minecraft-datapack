@@ -2,8 +2,8 @@
 # The actual effect logic for Nature's Vengeance.
 # Triggered by nations:farmer/natures_vengeance
 
-# 1. Set Cooldown to 400 ticks (20 seconds)
-scoreboard players set @s nations_cd_vengeance 400
+# 1. Set Cooldown to 100 ticks (5 seconds)
+scoreboard players set @s nations_cd_vengeance 100
 
 # 2. Audio Cue
 execute at @s run playsound entity.evoker.cast_spell player @a ~ ~ ~ 1 1
