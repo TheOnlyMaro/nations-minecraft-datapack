@@ -1,0 +1,50 @@
+{
+    "criteria": {
+        "mine_deepslate_ore": {
+            "trigger": "minecraft:item_durability_changed",
+            "conditions": {
+                "delta": {
+                    "min": -1
+                },
+                "item": {
+                    "items": [
+                        "minecraft:iron_pickaxe", "minecraft:golden_pickaxe", "minecraft:diamond_pickaxe", "minecraft:netherite_pickaxe", "minecraft:stone_pickaxe", "minecraft:wooden_pickaxe"
+                    ]
+                },
+                "player": [
+                    {
+                        "condition": "minecraft:inverted",
+                        "term": {
+                            "condition": "minecraft:entity_properties",
+                            "entity": "this",
+                            "predicate": {
+                                "nbt": "{Tags:[\"role_miner\"]}"
+                            }
+                        }
+                    },
+                    {
+                        "condition": "minecraft:location_check",
+                        "predicate": {
+                            "block": {
+                                "blocks": [
+                                    "minecraft:deepslate_coal_ore",
+                                    "minecraft:deepslate_copper_ore",
+                                    "minecraft:deepslate_diamond_ore",
+                                    "minecraft:deepslate_emerald_ore",
+                                    "minecraft:deepslate_gold_ore",
+                                    "minecraft:deepslate_iron_ore",
+                                    "minecraft:deepslate_lapis_ore",
+                                    "minecraft:deepslate_redstone_ore"
+                                ]
+                            }
+                        },
+                        "offsetY": 1
+                    }
+                ]
+            }
+        }
+    },
+    "rewards": {
+        "function": "nations:nerf/fragile_tool_deepslate_ore"
+    }
+}

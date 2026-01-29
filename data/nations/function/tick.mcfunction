@@ -92,3 +92,6 @@ execute as @a[scores={nations_warmup=1}] run function nations:explorer/home_warp
 function nations:utils/detect_crawl
 execute as @a[predicate=nations:is_miner] at @s run function nations:miner/cave_dweller
 execute as @a[predicate=nations:is_miner] at @s run function nations:miner/tunnel_rat
+
+# Miner Nerf - Fragile Tools for Non-Miners
+function nations:nerf/check_fragile_tools

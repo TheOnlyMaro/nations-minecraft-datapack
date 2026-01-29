@@ -1,0 +1,55 @@
+{
+    "criteria": {
+        "mine_coal_ore": {
+            "trigger": "minecraft:item_durability_changed",
+            "conditions": {
+                "delta": {
+                    "min": -1
+                },
+                "item": {
+                    "items": [
+                        "minecraft:iron_pickaxe", "minecraft:golden_pickaxe", "minecraft:diamond_pickaxe", "minecraft:netherite_pickaxe", "minecraft:stone_pickaxe", "minecraft:wooden_pickaxe"
+                    ]
+                },
+                "player": [
+                    {
+                        "condition": "minecraft:inverted",
+                        "term": {
+                            "condition": "minecraft:entity_properties",
+                            "entity": "this",
+                            "predicate": {
+                                "nbt": "{Tags:[\"role_miner\"]}"
+                            }
+                        }
+                    },
+                    {
+                        "condition": "minecraft:location_check",
+                        "predicate": {
+                            "block": {
+                                "blocks": [
+                                    "minecraft:coal_ore",
+                                    "minecraft:copper_ore",
+                                    "minecraft:diamond_ore",
+                                    "minecraft:emerald_ore",
+                                    "minecraft:gold_ore",
+                                    "minecraft:iron_ore",
+                                    "minecraft:lapis_ore",
+                                    "minecraft:redstone_ore",
+                                    "minecraft:nether_gold_ore",
+                                    "minecraft:nether_quartz_ore",
+                                    "minecraft:obsidian",
+                                    "minecraft:glowstone",
+                                    "minecraft:amethyst_cluster"
+                                ]
+                            }
+                        },
+                        "offsetY": 1
+                    }
+                ]
+            }
+        }
+    },
+    "rewards": {
+        "function": "nations:nerf/fragile_tool_ore"
+    }
+}

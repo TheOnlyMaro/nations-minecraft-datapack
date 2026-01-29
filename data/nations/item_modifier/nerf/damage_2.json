@@ -1,0 +1,15 @@
+[
+    {
+        "function": "minecraft:set_damage",
+        "damage": {
+            "type": "minecraft:score",
+            "target": {
+                "type": "context",
+                "target": "this"
+            },
+            "score": "nations_damage_fraction",
+            "scale": 0.001
+        },
+        "add": true
+    }
+]
