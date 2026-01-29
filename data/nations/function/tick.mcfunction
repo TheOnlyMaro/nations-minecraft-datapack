@@ -30,4 +30,5 @@ execute as @a[scores={nations_deaths=1..}] run function nations:utils/death_chec
 # Persistent Roles / Markers
 execute as @e[type=marker,tag=nations_composter_marker] at @s run function nations:farmer/composter_tick
 function nations:enchanter/summoner/summon_tick
+function nations:enchanter/summoner/summon_marker_tick
 
