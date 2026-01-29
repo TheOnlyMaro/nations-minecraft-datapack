@@ -22,6 +22,9 @@ execute as @a[scores={nations_mend_trigger=1..}] run function nations:enchanter/
 # execute as @e[type=item] if data entity @s Item.components."minecraft:custom_data".nations_summon_item run function nations:enchanter/summoner/summoner_release
 function nations:nerf/clear_restricted_items
 
+# Anvil Nerf - Check for anvil interactions via statistic
+execute as @a[scores={nations_anvil_use=1..}] at @s run function nations:nerf/anvil_check
+
 
 
 # Check Death Reset
