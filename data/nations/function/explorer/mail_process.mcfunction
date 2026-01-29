@@ -9,7 +9,7 @@ execute unless entity @s[level=5..] run tellraw @s {"text":"Not enough XP!","col
 execute unless entity @s[level=5..] run return fail
 
 # Store target player ID
-scoreboard players operation #target nations_pid = @s nations_mail_id
+scoreboard players operation #target nations_pid = @s mailto
 
 # Copy item to storage
 data modify storage nations:mail payload set from entity @s SelectedItem
@@ -28,5 +28,5 @@ execute as @a if score @s nations_pid = #target nations_pid unless data entity @
 xp add @s -5 levels
 
 # Feedback to sender
-execute as @a if score @s nations_pid = #target nations_pid run tellraw @a[predicate=nations:is_explorer,scores={nations_mail_id=1..}] [{"text":"✉ Mail sent to ","color":"green"},{"selector":"@s","color":"yellow"}," for 5 XP levels!"]
+execute as @a if score @s nations_pid = #target nations_pid run tellraw @a[predicate=nations:is_explorer,scores={mailto=1..}] [{"text":"✉ Mail sent to ","color":"green"},{"selector":"@s","color":"yellow"}," for 5 XP levels!"]
 playsound minecraft:entity.enderman.teleport master @s ~ ~ ~ 1 1.2
