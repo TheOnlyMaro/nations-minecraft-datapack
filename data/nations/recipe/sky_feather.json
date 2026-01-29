@@ -1,0 +1,28 @@
+{
+    "type": "minecraft:crafting_shapeless",
+    "ingredients": [
+        "minecraft:feather",
+        "minecraft:experience_bottle"
+    ],
+    "result": {
+        "id": "minecraft:feather",
+        "count": 1,
+        "components": {
+            "minecraft:custom_name": {
+                "text": "Sky Feather",
+                "color": "aqua",
+                "italic": false
+            },
+            "minecraft:enchantment_glint_override": true,
+            "minecraft:food": {
+                "nutrition": 0,
+                "saturation": 0,
+                "can_always_eat": true
+            },
+            "minecraft:consumable": {
+                "consume_seconds": 0.3
+            },
+            "minecraft:custom_data": "{nations_sky_feather:1b,enchanter_restricted:1b}"
+        }
+    }
+}

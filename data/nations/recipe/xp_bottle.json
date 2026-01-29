@@ -1,8 +1,22 @@
 {
-  "type": "minecraft:crafting_shapeless",
-  "ingredients": [
-    { "item": "minecraft:glass_bottle" },
-    { "item": "minecraft:experience_bottle" }
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "GGG",
+    "GLG",
+    "GBG"
   ],
-  "result": { "item": "minecraft:experience_bottle", "count": 1 }
+  "key": {
+    "G": "minecraft:gold_nugget",
+    "L": "minecraft:lapis_lazuli",
+    "B": "minecraft:glass_bottle"
+  },
+  "result": {
+    "id": "minecraft:experience_bottle",
+    "count": 1,
+    "components": {
+      "minecraft:custom_data": {
+        "enchanter_restricted": 1
+      }
+    }
+  }
 }

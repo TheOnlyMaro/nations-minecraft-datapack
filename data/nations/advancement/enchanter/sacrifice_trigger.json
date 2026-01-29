@@ -1,0 +1,16 @@
+{
+    "criteria": {
+        "kill_vessel": {
+            "trigger": "minecraft:player_killed_entity",
+            "conditions": {
+                "entity": {
+                    "type": "minecraft:pig",
+                    "nbt": "{Tags:['nations_vessel']}"
+                }
+            }
+        }
+    },
+    "rewards": {
+        "function": "nations:enchanter/blood_sacrifice/blood_sacrifice"
+    }
+}
