@@ -1,4 +1,5 @@
 # nations:tick — run each tick
+# call role handlers, cooldown processors, and periodic checks
 
 # Cooldown Managers
 # Warrior
@@ -25,8 +26,6 @@ function nations:nerf/clear_restricted_items
 # Anvil Nerf - Check for anvil interactions via statistic
 execute as @a[scores={nations_anvil_use=1..}] at @s run function nations:nerf/anvil_check
 
-
-
 # Check Death Reset
 execute as @a[scores={nations_deaths=1..}] run function nations:utils/death_check
 
@@ -35,7 +34,10 @@ execute as @e[type=marker,tag=nations_composter_marker] at @s run function natio
 function nations:enchanter/summoner/summon_tick
 function nations:enchanter/summoner/summon_marker_tick
 
-# call role handlers, cooldown processors, and periodic checks
+# Miner Hyper-Smelting - Process every 5 ticks
+scoreboard players add #smelt_timer nations_smelt_timer 1
+execute if score #smelt_timer nations_smelt_timer matches 5.. run scoreboard players set #smelt_timer nations_smelt_timer 0
+execute if score #smelt_timer nations_smelt_timer matches 0 as @e[type=marker,tag=miner_furnace] at @s run function nations:miner/hyper_smelt
 
 # Explorer
 execute as @a[predicate=nations:is_explorer] at @s run function nations:explorer/rapid_transit
@@ -45,6 +47,7 @@ execute as @a[predicate=nations:is_explorer] at @s run function nations:explorer
 scoreboard players add #fatigue_timer nations_pid 1
 execute if score #fatigue_timer nations_pid matches 10.. run function nations:explorer/travel_fatigue
 execute if score #fatigue_timer nations_pid matches 10.. run scoreboard players set #fatigue_timer nations_pid 0
+
 # Explorer Trigger
 scoreboard players enable @a[predicate=nations:is_explorer] backpack
 execute as @a[predicate=nations:is_explorer,scores={backpack=1..}] run function nations:explorer/backpack_swap
@@ -89,3 +92,17 @@ scoreboard players reset @a nations_took_damage
 
 # Warmup Completion Check
 execute as @a[scores={nations_warmup=1}] run function nations:explorer/home_warp_perform
+
+# Miner Abilities
+function nations:utils/detect_crawl
+execute as @a[predicate=nations:is_miner] at @s run function nations:miner/cave_dweller
+execute as @a[predicate=nations:is_miner] at @s run function nations:miner/tunnel_rat
+
+# Miner Lithic Resonance (runs every 4 seconds = 80 ticks)
+scoreboard players add #lithic_timer nations_pid 1
+execute if score #lithic_timer nations_pid matches 80.. run tellraw @a[predicate=nations:is_miner] [{"text":"[DEBUG] Lithic timer triggered","color":"gold"}]
+execute if score #lithic_timer nations_pid matches 80.. as @a[predicate=nations:is_miner] at @s run function nations:miner/lithic_resonance
+execute if score #lithic_timer nations_pid matches 80.. run scoreboard players set #lithic_timer nations_pid 0
+
+# Miner Nerf - Fragile Tools for Non-Miners
+execute as @a[tag=!role_miner] run function nations:nerf/check_fragile_tools

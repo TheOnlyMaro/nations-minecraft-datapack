@@ -2,10 +2,10 @@
   "condition": "minecraft:entity_properties",
   "entity": "this",
   "predicate": {
-    "nbt": {
-      "Tags": [
-        "role_farmer"
-      ]
+    "equipment": {
+      "mainhand": {
+        "items": "minecraft:diamond"
+      }
     }
   }
 }
