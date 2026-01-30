@@ -100,7 +100,7 @@ execute as @a[predicate=nations:is_miner] at @s run function nations:miner/tunne
 
 # Miner Lithic Resonance (runs every 4 seconds = 80 ticks)
 scoreboard players add #lithic_timer nations_pid 1
-execute if score #lithic_timer nations_pid matches 80.. run tellraw @a[predicate=nations:is_miner] [{"text":"[DEBUG] Lithic timer triggered","color":"gold"}]
+
 execute if score #lithic_timer nations_pid matches 80.. as @a[predicate=nations:is_miner] at @s run function nations:miner/lithic_resonance
 execute if score #lithic_timer nations_pid matches 80.. run scoreboard players set #lithic_timer nations_pid 0
 

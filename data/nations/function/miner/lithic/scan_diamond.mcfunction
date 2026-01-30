@@ -2,7 +2,7 @@
 # Scan for diamond ore or deepslate diamond ore within 16 blocks
 # Finds nearest ore by scanning in expanding layers from player
 
-tellraw @s [{"text":"[DEBUG] Starting diamond scan...","color":"aqua"}]
+
 
 # Tag player to track if ore found
 tag @s remove lithic_found
@@ -27,5 +27,5 @@ execute if entity @s[tag=!lithic_found] positioned ~ ~8 ~ run function nations:m
 execute if entity @s[tag=!lithic_found] positioned ~ ~-8 ~ run function nations:miner/lithic/check_diamond_layer
 
 # Feedback if nothing found
-execute if entity @s[tag=!lithic_found] run tellraw @s [{"text":"♦ ","color":"aqua"},{"text":"No diamond ore detected nearby...","color":"gray"}]
+execute if entity @s[tag=!lithic_found] run title @s actionbar [{"text":"♦ ","color":"aqua"},{"text":"No diamond ore detected nearby...","color":"gray"}]
 tag @s remove lithic_found

@@ -4,7 +4,7 @@
 # (Force re-index)
 
 # 1. Check if Home exists checks
-$execute unless data storage nations:data players.$(uuid0)_$(uuid1)_$(uuid2)_$(uuid3).home run tellraw @s {"text":"No home set! Use /trigger set_home","color":"red"}
+$execute unless data storage nations:data players.$(uuid0)_$(uuid1)_$(uuid2)_$(uuid3).home run title @s actionbar {"text":"No home set! Use /trigger set_home","color":"red"}
 $execute unless data storage nations:data players.$(uuid0)_$(uuid1)_$(uuid2)_$(uuid3).home run return 0
 
 # 2. Extract Data to Macro Args

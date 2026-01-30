@@ -3,7 +3,7 @@
 # Called at the ore position
 
 # Debug message with coordinates
-tellraw @a[distance=..16] [{"text":"[DEBUG] ORE FOUND! Placing particles","color":"green","bold":true}]
+
 
 # Summon marker for reference
 summon marker ~ ~ ~ {Tags:["lithic_marker"]}
@@ -20,7 +20,7 @@ particle minecraft:electric_spark ~ ~ ~ 0.5 0.5 0.5 0.1 40 force @a[distance=..6
 
 # Tag player as found
 execute as @a[tag=!lithic_found,distance=..16,predicate=nations:is_miner] run tag @s add lithic_found
-execute as @a[tag=lithic_found,distance=..16] run tellraw @s [{"text":"[DEBUG] Player tagged as found","color":"green"}]
+
 
 # Kill marker after 5 seconds for debugging
 schedule function nations:miner/lithic/cleanup_markers 100t

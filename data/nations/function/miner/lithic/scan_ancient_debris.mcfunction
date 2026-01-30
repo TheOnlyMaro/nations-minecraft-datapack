@@ -1,7 +1,7 @@
 # nations:miner/lithic/scan_ancient_debris
 # Scan for ancient debris within 16 blocks
 
-tellraw @s [{"text":"[DEBUG] Starting ancient debris scan...","color":"dark_purple"}]
+
 
 tag @s remove lithic_found
 
@@ -23,5 +23,5 @@ execute if entity @s[tag=!lithic_found] positioned ~ ~-7 ~ run function nations:
 execute if entity @s[tag=!lithic_found] positioned ~ ~8 ~ run function nations:miner/lithic/check_ancient_debris_layer
 execute if entity @s[tag=!lithic_found] positioned ~ ~-8 ~ run function nations:miner/lithic/check_ancient_debris_layer
 
-execute if entity @s[tag=!lithic_found] run tellraw @s [{"text":"♦ ","color":"dark_purple"},{"text":"No ancient debris detected nearby...","color":"gray"}]
+execute if entity @s[tag=!lithic_found] run title @s actionbar [{"text":"♦ ","color":"dark_purple"},{"text":"No ancient debris detected nearby...","color":"gray"}]
 tag @s remove lithic_found

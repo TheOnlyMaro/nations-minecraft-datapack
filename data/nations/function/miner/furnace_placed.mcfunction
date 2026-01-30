@@ -26,5 +26,4 @@ execute positioned ~0 ~0 ~-1 align xyz positioned ~0.5 ~0.5 ~0.5 if block ~ ~ ~ 
 execute positioned ~0 ~0 ~1 align xyz positioned ~0.5 ~0.5 ~0.5 if block ~ ~ ~ minecraft:blast_furnace unless entity @e[type=marker,tag=miner_furnace,distance=..0.1] run summon marker ~ ~ ~ {Tags:["miner_furnace"]}
 
 
-# Debug feedback
-tellraw @s [{"text":"[DEBUG] Miner furnace search complete","color":"gold"}]
+

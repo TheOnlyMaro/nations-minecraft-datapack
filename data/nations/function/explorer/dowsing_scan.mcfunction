@@ -57,4 +57,4 @@ execute positioned ~-15 ~ ~15 if block ~ ~ ~ #nations:dowsing_targets run return
 execute positioned ~-15 ~ ~-15 if block ~ ~ ~ #nations:dowsing_targets run return run function nations:explorer/dowsing_found
 
 # If nothing found, show message
-tellraw @s {"text":"No chests or spawners found nearby!","color":"yellow"}
+title @s actionbar {"text":"No chests or spawners found nearby!","color":"yellow"}

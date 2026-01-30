@@ -21,5 +21,5 @@ execute if entity @s[tag=!lithic_found] positioned ~ ~-7 ~ run function nations:
 execute if entity @s[tag=!lithic_found] positioned ~ ~8 ~ run function nations:miner/lithic/check_redstone_layer
 execute if entity @s[tag=!lithic_found] positioned ~ ~-8 ~ run function nations:miner/lithic/check_redstone_layer
 
-execute if entity @s[tag=!lithic_found] run tellraw @s [{"text":"♦ ","color":"dark_red"},{"text":"No redstone ore detected nearby...","color":"gray"}]
+execute if entity @s[tag=!lithic_found] run title @s actionbar [{"text":"♦ ","color":"dark_red"},{"text":"No redstone ore detected nearby...","color":"gray"}]
 tag @s remove lithic_found

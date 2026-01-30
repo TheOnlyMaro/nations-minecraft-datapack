@@ -3,11 +3,14 @@
 # Cooldown: 5 minutes (6000 ticks)
 
 # 1. Check PvP Lock
-execute if score @s nations_combat_timer matches 1.. run tellraw @s {"text":"Cannot set home while in combat!","color":"red"}
+execute if score @s nations_combat_timer matches 1.. run title @s actionbar {"text":"Cannot set home while in combat!","color":"red"}
 execute if score @s nations_combat_timer matches 1.. run return 0
 
 # 2. Check Cooldown
-execute if score @s nations_cooldown_sethome matches 1.. run tellraw @s {"text":"Set Home is on cooldown!","color":"red"}
+execute if score @s nations_cooldown_sethome matches 1.. run scoreboard players operation #TEMP nations_cooldown_sethome = @s nations_cooldown_sethome
+execute if score @s nations_cooldown_sethome matches 1.. run scoreboard players set #CONST_20 nations_cooldown_sethome 20
+execute if score @s nations_cooldown_sethome matches 1.. run scoreboard players operation #TEMP nations_cooldown_sethome /= #CONST_20 nations_cooldown_sethome
+execute if score @s nations_cooldown_sethome matches 1.. run title @s actionbar [{"text":"Set Home on cooldown: ","color":"red"},{"score":{"name":"#TEMP","objective":"nations_cooldown_sethome"},"color":"gold"},{"text":"s","color":"red"}]
 execute if score @s nations_cooldown_sethome matches 1.. run return 0
 
 # 3. Save Location to Storage
@@ -30,5 +33,5 @@ function nations:explorer/set_home_exec with storage nations:temp macro_args
 
 # 4. Set Cooldown & Feedback
 scoreboard players set @s nations_cooldown_sethome 6000
-tellraw @s {"text":"Home point set!","color":"green"}
+title @s actionbar {"text":"Home point set!","color":"green"}
 playsound minecraft:block.amethyst_block.resonate master @s ~ ~ ~ 1 1

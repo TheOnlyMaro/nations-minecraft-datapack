@@ -8,5 +8,5 @@ summon item ~ ~3 ~ {Item:{id:"minecraft:stone",count:1},PickupDelay:0s,Tags:["na
 data modify entity @e[type=item,tag=nations_mail_item,limit=1,sort=nearest] Item set from storage nations:mail payload
 
 # Feedback to recipient
-tellraw @s [{"text":"✉ You received mail!","color":"aqua","bold":true}]
+title @s actionbar [{"text":"✉ You received mail!","color":"aqua","bold":true}]
 playsound minecraft:entity.enderman.teleport master @s ~ ~ ~ 1 0.8

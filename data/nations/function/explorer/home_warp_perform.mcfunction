@@ -3,11 +3,11 @@
 # Input: @s (The player)
 
 # 1. Final XP Check (Prevent dropping items during warmup to cheat)
-execute unless entity @s[level=15..] run tellraw @s {"text":"Warp failed: Insufficient XP!","color":"red"}
+execute unless entity @s[level=15..] run title @s actionbar {"text":"Warp failed: Insufficient XP!","color":"red"}
 execute unless entity @s[level=15..] run return 0
 
 # 2. Final Combat Check
-execute if score @s nations_combat_timer matches 1.. run tellraw @s {"text":"Warp failed: Entered combat!","color":"red"}
+execute if score @s nations_combat_timer matches 1.. run title @s actionbar {"text":"Warp failed: Entered combat!","color":"red"}
 execute if score @s nations_combat_timer matches 1.. run return 0
 
 # 3. Deduct XP

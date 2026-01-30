@@ -6,7 +6,7 @@
 advancement revoke @s only nations:enchanter/capture_trigger
 
 # Debug
-execute if entity @s[tag=role_enchanter] run tellraw @s {"text":"[DEBUG] Enchanter Triggered! Checking for Mob...","color":"gold"}
+
 
 # 1. Enchanter Only
 execute unless entity @s[tag=role_enchanter] run return 0

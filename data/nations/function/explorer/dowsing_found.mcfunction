@@ -11,4 +11,4 @@ execute store result storage nations:dowsing target_y int 1 run data get entity 
 execute store result storage nations:dowsing target_z int 1 run data get entity @s Pos[2]
 
 # Feedback
-tellraw @s [{"text":"Dowsing detected a target ","color":"aqua"},{"text":"[","color":"gray"},{"storage":"nations:dowsing","nbt":"target_x","color":"gold"},{"text":", ","color":"gray"},{"storage":"nations:dowsing","nbt":"target_y","color":"gold"},{"text":", ","color":"gray"},{"storage":"nations:dowsing","nbt":"target_z","color":"gold"},{"text":"]","color":"gray"}]
+title @s actionbar [{"text":"Dowsing detected a target ","color":"aqua"},{"text":"[","color":"gray"},{"storage":"nations:dowsing","nbt":"target_x","color":"gold"},{"text":", ","color":"gray"},{"storage":"nations:dowsing","nbt":"target_y","color":"gold"},{"text":", ","color":"gray"},{"storage":"nations:dowsing","nbt":"target_z","color":"gold"},{"text":"]","color":"gray"}]

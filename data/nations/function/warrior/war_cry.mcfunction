@@ -13,7 +13,7 @@ execute if score #GLOBAL nations_global_warcry_cd matches 1.. run scoreboard pla
 execute if score #GLOBAL nations_global_warcry_cd matches 1.. run scoreboard players operation #TEMP nations_global_warcry_cd /= #CONST_20 nations_global_warcry_cd
 
 # Check and message
-execute if score #GLOBAL nations_global_warcry_cd matches 1.. run tellraw @s [{"text":"War Cry is on cooldown! ","color":"red"},{"score":{"name":"#TEMP","objective":"nations_global_warcry_cd"},"color":"gold"},{"text":"s remaining","color":"red"}]
+execute if score #GLOBAL nations_global_warcry_cd matches 1.. run title @s actionbar [{"text":"War Cry on cooldown: ","color":"red"},{"score":{"name":"#TEMP","objective":"nations_global_warcry_cd"},"color":"gold"},{"text":"s","color":"red"}]
 execute if score #GLOBAL nations_global_warcry_cd matches 1.. run return 0
 
 # 3. Apply Cooldown
@@ -22,7 +22,7 @@ scoreboard players set #GLOBAL nations_global_warcry_cd 2400
 # 4. Audio / Visuals
 execute at @s run particle minecraft:angry_villager ~ ~1 ~ 1 0.5 1 0 10
 execute at @s run playsound minecraft:entity.evoker.cast_spell master @a[distance=..20] ~ ~ ~ 1 1
-tellraw @a[distance=..20] [{"selector":"@s","color":"gold"},{"text":" used War Cry!","color":"red"}]
+title @a[distance=..20] actionbar [{"selector":"@s","color":"gold"},{"text":" used War Cry!","color":"red"}]
 
 # 5. Distribute Effect
 function nations:utils/team_strength_distributor

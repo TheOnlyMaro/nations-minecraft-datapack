@@ -18,4 +18,4 @@ execute as @e[type=arrow,nbt={inGround:0b},tag=!weightless_processed,distance=..
 execute if score #arrow_found nations_pid matches 1 run function nations:explorer/weightless_consume
 execute if score #arrow_found nations_pid matches 1 run scoreboard players set @s nations_weightless_cd 200
 execute if score #arrow_found nations_pid matches 1 at @s run playsound minecraft:entity.phantom.flap master @s ~ ~ ~ 0.5 1.5
-execute if score #arrow_found nations_pid matches 1 run tellraw @s [{"text":"✦ ","color":"yellow"},{"text":"Weightless Spirit activated!","color":"aqua"}]
+execute if score #arrow_found nations_pid matches 1 run title @s actionbar [{"text":"✦ ","color":"yellow"},{"text":"Weightless Spirit activated!","color":"aqua"}]

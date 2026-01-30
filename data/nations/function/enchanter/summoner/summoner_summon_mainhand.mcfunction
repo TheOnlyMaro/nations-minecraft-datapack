@@ -18,7 +18,7 @@ data modify entity @e[tag=summon_marker,limit=1] data.nations_mob_data set from 
 item modify entity @s weapon.mainhand nations:consume_one
 
 # 5. Initial effects and message
-tellraw @s {"text":"Channeling summon...","color":"gold"}
+title @s actionbar {"text":"Channeling summon...","color":"gold"}
 playsound block.beacon.activate ambient @a ~ ~ ~ 1 1.5
 particle enchant ~ ~1 ~ 0.5 0.5 0.5 1 30
 particle portal ~ ~1 ~ 0.3 0.5 0.3 0.5 20

@@ -2,11 +2,11 @@
 # Display list of online players to send item to
 
 # Check: Holding an item in main hand
-execute unless data entity @s SelectedItem run tellraw @s {"text":"Hold an item in your main hand to send!","color":"red"}
+execute unless data entity @s SelectedItem run title @s actionbar {"text":"Hold an item in your main hand to send!","color":"red"}
 execute unless data entity @s SelectedItem run return fail
 
 # Check: Has 5+ XP levels
-execute unless entity @s[level=5..] run tellraw @s {"text":"You need 5 XP levels to send mail!","color":"red"}
+execute unless entity @s[level=5..] run title @s actionbar {"text":"You need 5 XP levels to send mail!","color":"red"}
 execute unless entity @s[level=5..] run return fail
 
 # Display Header

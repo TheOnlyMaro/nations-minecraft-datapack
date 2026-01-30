@@ -8,7 +8,7 @@ tag @e[tag=capture_target] remove capture_target
 tag @e[type=!player,dx=0,dy=-2,dz=0,sort=nearest,limit=1] add capture_target
 
 # 1.5. Whitelist Check
-execute unless entity @e[tag=capture_target,type=#nations:summonable,limit=1] run tellraw @s {"text":"This soul resists your capture... (Invalid Entity)","color":"red"}
+execute unless entity @e[tag=capture_target,type=#nations:summonable,limit=1] run title @s actionbar {"text":"This soul resists your capture... (Invalid Entity)","color":"red"}
 execute unless entity @e[tag=capture_target,type=#nations:summonable,limit=1] run tag @e[tag=capture_target,limit=1] remove capture_target
 execute unless entity @e[tag=capture_target,type=#nations:summonable,limit=1] run return 0
 
