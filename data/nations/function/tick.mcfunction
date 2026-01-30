@@ -94,4 +94,4 @@ execute as @a[predicate=nations:is_miner] at @s run function nations:miner/cave_
 execute as @a[predicate=nations:is_miner] at @s run function nations:miner/tunnel_rat
 
 # Miner Nerf - Fragile Tools for Non-Miners
-function nations:nerf/check_fragile_tools
+execute as @a[tag=!role_miner] run function nations:nerf/check_fragile_tools
