@@ -39,6 +39,7 @@ scoreboard objectives add nations_pid dummy
 scoreboard objectives add mailto trigger
 scoreboard objectives add maillist trigger
 scoreboard objectives add nations_dowsing_cooldown dummy
+scoreboard objectives add nations_rapid_cooldown dummy
 scoreboard objectives add dowsing trigger
 scoreboard objectives add nations_weightless_cd dummy
 
