@@ -93,5 +93,11 @@ function nations:utils/detect_crawl
 execute as @a[predicate=nations:is_miner] at @s run function nations:miner/cave_dweller
 execute as @a[predicate=nations:is_miner] at @s run function nations:miner/tunnel_rat
 
+# Miner Lithic Resonance (runs every 4 seconds = 80 ticks)
+scoreboard players add #lithic_timer nations_pid 1
+execute if score #lithic_timer nations_pid matches 80.. run tellraw @a[predicate=nations:is_miner] [{"text":"[DEBUG] Lithic timer triggered","color":"gold"}]
+execute if score #lithic_timer nations_pid matches 80.. as @a[predicate=nations:is_miner] at @s run function nations:miner/lithic_resonance
+execute if score #lithic_timer nations_pid matches 80.. run scoreboard players set #lithic_timer nations_pid 0
+
 # Miner Nerf - Fragile Tools for Non-Miners
 execute as @a[tag=!role_miner] run function nations:nerf/check_fragile_tools

@@ -1,0 +1,56 @@
+# nations:miner/lithic/check_redstone_layer
+# Check layer for redstone ore
+
+execute if block ~ ~ ~ #minecraft:redstone_ores run return run function nations:miner/lithic/mark_ore
+execute positioned ~1 ~ ~ if block ~ ~ ~ #minecraft:redstone_ores run return run function nations:miner/lithic/mark_ore
+execute positioned ~-1 ~ ~ if block ~ ~ ~ #minecraft:redstone_ores run return run function nations:miner/lithic/mark_ore
+execute positioned ~ ~ ~1 if block ~ ~ ~ #minecraft:redstone_ores run return run function nations:miner/lithic/mark_ore
+execute positioned ~ ~ ~-1 if block ~ ~ ~ #minecraft:redstone_ores run return run function nations:miner/lithic/mark_ore
+execute positioned ~1 ~ ~1 if block ~ ~ ~ #minecraft:redstone_ores run return run function nations:miner/lithic/mark_ore
+execute positioned ~1 ~ ~-1 if block ~ ~ ~ #minecraft:redstone_ores run return run function nations:miner/lithic/mark_ore
+execute positioned ~-1 ~ ~1 if block ~ ~ ~ #minecraft:redstone_ores run return run function nations:miner/lithic/mark_ore
+execute positioned ~-1 ~ ~-1 if block ~ ~ ~ #minecraft:redstone_ores run return run function nations:miner/lithic/mark_ore
+execute positioned ~2 ~ ~ if block ~ ~ ~ #minecraft:redstone_ores run return run function nations:miner/lithic/mark_ore
+execute positioned ~-2 ~ ~ if block ~ ~ ~ #minecraft:redstone_ores run return run function nations:miner/lithic/mark_ore
+execute positioned ~ ~ ~2 if block ~ ~ ~ #minecraft:redstone_ores run return run function nations:miner/lithic/mark_ore
+execute positioned ~ ~ ~-2 if block ~ ~ ~ #minecraft:redstone_ores run return run function nations:miner/lithic/mark_ore
+execute positioned ~3 ~ ~ if block ~ ~ ~ #minecraft:redstone_ores run return run function nations:miner/lithic/mark_ore
+execute positioned ~-3 ~ ~ if block ~ ~ ~ #minecraft:redstone_ores run return run function nations:miner/lithic/mark_ore
+execute positioned ~ ~ ~3 if block ~ ~ ~ #minecraft:redstone_ores run return run function nations:miner/lithic/mark_ore
+execute positioned ~ ~ ~-3 if block ~ ~ ~ #minecraft:redstone_ores run return run function nations:miner/lithic/mark_ore
+execute positioned ~2 ~ ~2 if block ~ ~ ~ #minecraft:redstone_ores run return run function nations:miner/lithic/mark_ore
+execute positioned ~2 ~ ~-2 if block ~ ~ ~ #minecraft:redstone_ores run return run function nations:miner/lithic/mark_ore
+execute positioned ~-2 ~ ~2 if block ~ ~ ~ #minecraft:redstone_ores run return run function nations:miner/lithic/mark_ore
+execute positioned ~-2 ~ ~-2 if block ~ ~ ~ #minecraft:redstone_ores run return run function nations:miner/lithic/mark_ore
+execute positioned ~4 ~ ~ if block ~ ~ ~ #minecraft:redstone_ores run return run function nations:miner/lithic/mark_ore
+execute positioned ~-4 ~ ~ if block ~ ~ ~ #minecraft:redstone_ores run return run function nations:miner/lithic/mark_ore
+execute positioned ~ ~ ~4 if block ~ ~ ~ #minecraft:redstone_ores run return run function nations:miner/lithic/mark_ore
+execute positioned ~ ~ ~-4 if block ~ ~ ~ #minecraft:redstone_ores run return run function nations:miner/lithic/mark_ore
+execute positioned ~3 ~ ~3 if block ~ ~ ~ #minecraft:redstone_ores run return run function nations:miner/lithic/mark_ore
+execute positioned ~3 ~ ~-3 if block ~ ~ ~ #minecraft:redstone_ores run return run function nations:miner/lithic/mark_ore
+execute positioned ~-3 ~ ~3 if block ~ ~ ~ #minecraft:redstone_ores run return run function nations:miner/lithic/mark_ore
+execute positioned ~-3 ~ ~-3 if block ~ ~ ~ #minecraft:redstone_ores run return run function nations:miner/lithic/mark_ore
+execute positioned ~5 ~ ~ if block ~ ~ ~ #minecraft:redstone_ores run return run function nations:miner/lithic/mark_ore
+execute positioned ~-5 ~ ~ if block ~ ~ ~ #minecraft:redstone_ores run return run function nations:miner/lithic/mark_ore
+execute positioned ~ ~ ~5 if block ~ ~ ~ #minecraft:redstone_ores run return run function nations:miner/lithic/mark_ore
+execute positioned ~ ~ ~-5 if block ~ ~ ~ #minecraft:redstone_ores run return run function nations:miner/lithic/mark_ore
+execute positioned ~4 ~ ~4 if block ~ ~ ~ #minecraft:redstone_ores run return run function nations:miner/lithic/mark_ore
+execute positioned ~4 ~ ~-4 if block ~ ~ ~ #minecraft:redstone_ores run return run function nations:miner/lithic/mark_ore
+execute positioned ~-4 ~ ~4 if block ~ ~ ~ #minecraft:redstone_ores run return run function nations:miner/lithic/mark_ore
+execute positioned ~-4 ~ ~-4 if block ~ ~ ~ #minecraft:redstone_ores run return run function nations:miner/lithic/mark_ore
+execute positioned ~6 ~ ~ if block ~ ~ ~ #minecraft:redstone_ores run return run function nations:miner/lithic/mark_ore
+execute positioned ~-6 ~ ~ if block ~ ~ ~ #minecraft:redstone_ores run return run function nations:miner/lithic/mark_ore
+execute positioned ~ ~ ~6 if block ~ ~ ~ #minecraft:redstone_ores run return run function nations:miner/lithic/mark_ore
+execute positioned ~ ~ ~-6 if block ~ ~ ~ #minecraft:redstone_ores run return run function nations:miner/lithic/mark_ore
+execute positioned ~5 ~ ~5 if block ~ ~ ~ #minecraft:redstone_ores run return run function nations:miner/lithic/mark_ore
+execute positioned ~5 ~ ~-5 if block ~ ~ ~ #minecraft:redstone_ores run return run function nations:miner/lithic/mark_ore
+execute positioned ~-5 ~ ~5 if block ~ ~ ~ #minecraft:redstone_ores run return run function nations:miner/lithic/mark_ore
+execute positioned ~-5 ~ ~-5 if block ~ ~ ~ #minecraft:redstone_ores run return run function nations:miner/lithic/mark_ore
+execute positioned ~7 ~ ~ if block ~ ~ ~ #minecraft:redstone_ores run return run function nations:miner/lithic/mark_ore
+execute positioned ~-7 ~ ~ if block ~ ~ ~ #minecraft:redstone_ores run return run function nations:miner/lithic/mark_ore
+execute positioned ~ ~ ~7 if block ~ ~ ~ #minecraft:redstone_ores run return run function nations:miner/lithic/mark_ore
+execute positioned ~ ~ ~-7 if block ~ ~ ~ #minecraft:redstone_ores run return run function nations:miner/lithic/mark_ore
+execute positioned ~8 ~ ~ if block ~ ~ ~ #minecraft:redstone_ores run return run function nations:miner/lithic/mark_ore
+execute positioned ~-8 ~ ~ if block ~ ~ ~ #minecraft:redstone_ores run return run function nations:miner/lithic/mark_ore
+execute positioned ~ ~ ~8 if block ~ ~ ~ #minecraft:redstone_ores run return run function nations:miner/lithic/mark_ore
+execute positioned ~ ~ ~-8 if block ~ ~ ~ #minecraft:redstone_ores run return run function nations:miner/lithic/mark_ore
