@@ -1,6 +1,6 @@
 # nations:explorer/set_home
 # Sets current location as home point in storage
-# Cooldown: 5 minutes (6000 ticks)
+# Cooldown: 30 minutes (36000 ticks)
 
 # 1. Check PvP Lock
 execute if score @s nations_combat_timer matches 1.. run title @s actionbar {"text":"Cannot set home while in combat!","color":"red"}
@@ -32,6 +32,6 @@ data modify storage nations:temp macro_args.uuid3 set from entity @s UUID[3]
 function nations:explorer/set_home_exec with storage nations:temp macro_args
 
 # 4. Set Cooldown & Feedback
-scoreboard players set @s nations_cooldown_sethome 6000
+scoreboard players set @s nations_cooldown_sethome 36000
 title @s actionbar {"text":"Home point set!","color":"green"}
 playsound minecraft:block.amethyst_block.resonate master @s ~ ~ ~ 1 1
