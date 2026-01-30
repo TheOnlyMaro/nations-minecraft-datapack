@@ -1,4 +1,4 @@
-# nations:explorer/dowsing_found_recursive
+# nations:explorer/dowsing/found_recursive
 # Called when dowsing target is found during recursive scan
 # Stores coordinates and calculates distance category
 

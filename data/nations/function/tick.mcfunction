@@ -83,7 +83,7 @@ scoreboard players remove @a[scores={nations_weightless_cd=1..}] nations_weightl
 
 # Explorer Dowsing Trigger
 scoreboard players enable @a[predicate=nations:is_explorer] dowsing
-execute as @a[predicate=nations:is_explorer,scores={dowsing=1..}] at @s run function nations:explorer/dowsing_activate
+execute as @a[predicate=nations:is_explorer,scores={dowsing=1..}] at @s run function nations:explorer/dowsing/activate
 scoreboard players reset @a[scores={dowsing=1..}] dowsing
 
 # Combat Detection (Reset Timer on Damage)

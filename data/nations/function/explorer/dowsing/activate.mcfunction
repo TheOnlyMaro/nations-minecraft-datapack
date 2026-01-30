@@ -1,4 +1,4 @@
-# nations:explorer/dowsing_activate
+# nations:explorer/dowsing/activate
 # Triggered by /trigger dowsing
 # Scans for chests/spawners in 30x30 radius and reports to player
 
@@ -26,4 +26,4 @@ scoreboard players set @s nations_dowsing_cooldown 100
 playsound minecraft:block.amethyst_block.resonate master @s ~ ~ ~ 1 1.2
 
 # Scan for targets in radius (v2 - complete box scan)
-function nations:explorer/dowsing_scan_v2
+function nations:explorer/dowsing/scan_v2

@@ -1,4 +1,4 @@
-# nations:explorer/dowsing_set_compass
+# nations:explorer/dowsing/set_compass
 # Replaces compass in offhand with one pointing to found storage
 # Uses data storage to get coordinates and pass to macro
 
@@ -9,4 +9,4 @@ execute store result storage nations:dowsing macro_data.ty int 1 run data get st
 execute store result storage nations:dowsing macro_data.tz int 1 run data get storage nations:dowsing target_z
 
 # Call macro function with the coordinate data
-function nations:explorer/dowsing_set_compass_macro with storage nations:dowsing macro_data
+function nations:explorer/dowsing/set_compass_macro with storage nations:dowsing macro_data

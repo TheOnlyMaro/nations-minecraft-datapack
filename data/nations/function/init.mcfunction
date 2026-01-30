@@ -8,6 +8,9 @@ scoreboard objectives add nations_health dummy
 scoreboard objectives add nations_cd_adrenaline dummy
 scoreboard objectives add nations_global_warcry_cd dummy
 
+# Constants
+scoreboard players set #CONST_-1 nations_pid -1
+
 # Apply Vanguard to all warriors on reload
 execute as @a run function nations:warrior/vanguard
 
