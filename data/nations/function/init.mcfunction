@@ -42,6 +42,7 @@ scoreboard objectives add nations_weightless_cd dummy
 # Miner Branch Initialization
 scoreboard objectives add nations_y dummy
 scoreboard objectives add nations_temp_2 dummy
+scoreboard objectives add nations_smelt_timer dummy
 
 # Miner Nerf - Track blocks mined (for Fragile Tools)
 # Regular ores (3x durability damage)

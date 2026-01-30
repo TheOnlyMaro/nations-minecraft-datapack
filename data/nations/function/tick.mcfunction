@@ -34,6 +34,11 @@ execute as @e[type=marker,tag=nations_composter_marker] at @s run function natio
 function nations:enchanter/summoner/summon_tick
 function nations:enchanter/summoner/summon_marker_tick
 
+# Miner Hyper-Smelting - Process every 5 ticks
+scoreboard players add #smelt_timer nations_smelt_timer 1
+execute if score #smelt_timer nations_smelt_timer matches 5.. run scoreboard players set #smelt_timer nations_smelt_timer 0
+execute if score #smelt_timer nations_smelt_timer matches 0 as @e[type=marker,tag=miner_furnace] at @s run function nations:miner/hyper_smelt
+
 # Explorer
 execute as @a[predicate=nations:is_explorer] at @s run function nations:explorer/rapid_transit
 execute as @a[predicate=nations:is_explorer] at @s run function nations:explorer/weightless_spirit
