@@ -17,10 +17,9 @@ execute as @a[tag=role_farmer] run function nations:farmer/photosynthesis
 execute as @a[tag=role_farmer] run function nations:farmer/convert_held_beetroots
 
 # Enchanter Branch Tick Loop
-execute as @a[scores={nations_mend_trigger=1..}] run function nations:enchanter/blood_mend/blood_mend
-# Check for Dropped Summon Paper (Releasing Soul)
-# REMOVED: Switched to Shield Block Trigger
-# execute as @e[type=item] if data entity @s Item.components."minecraft:custom_data".nations_summon_item run function nations:enchanter/summoner/summoner_release
+
+execute as @a[tag=role_enchanter] run function nations:enchanter/jump_handler
+
 function nations:nerf/clear_restricted_items
 
 # Anvil Nerf - Check for anvil interactions via statistic

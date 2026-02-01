@@ -23,7 +23,6 @@ scoreboard objectives add nations_summon_age dummy
 scoreboard objectives add nations_cd_skymage dummy
 scoreboard objectives add nations_deaths deathCount
 scoreboard objectives add nations_jump minecraft.custom:minecraft.jump
-scoreboard objectives add nations_mend_trigger dummy
 scoreboard objectives add nations_anvil_use minecraft.custom:minecraft.interact_with_anvil
 
 # Explorer Branch Initialization
